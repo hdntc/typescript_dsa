@@ -24,6 +24,7 @@ class LinkedList {
             this.head = new LLNode(initial);
         }
     };
+
     traverse(): any[] {
         const result = [this.head.value];
         let current = this.head;
@@ -34,7 +35,13 @@ class LinkedList {
         };
         
         return result;
-    }
+    };
+
+    insert(nodeValue: any, insertAfter: LLNode): void {
+        // places new node w/ value nodeValue after insertAfter node
+        const oldAfter: LLNode | null = insertAfter.next;
+        insertAfter.next = new LLNode(nodeValue, oldAfter);
+    };
 };
 
 export { LinkedList, LLNode };
