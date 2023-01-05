@@ -7,9 +7,11 @@ class LLNode<T> {
     };
 };
 
+type notLLNode<T> = T extends LLNode<any> ? never : T;
+
 class LinkedList<T> {
     head: LLNode<T>;
-    constructor(initial: T[] | T | LLNode<T>) {
+    constructor(initial: notLLNode<T>[] | notLLNode<T> | LLNode<T>) {
         if(initial instanceof Array) {
             const nodification = initial.map(element => new LLNode(element));
             
