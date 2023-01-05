@@ -7,7 +7,9 @@ class LLNode<T> {
     };
 };
 
-type notLLNode<T> = T extends LLNode<any> ? never : T;
+// the use of notLLNode in the LinkedList constructor ensures that user doesnt
+// erroneously try to construct LL with an array of nodes (the head suffices)
+type notLLNode<T> = T extends LLNode<any> ? never : T; 
 
 class LinkedList<T> {
     head: LLNode<T>;
