@@ -46,6 +46,26 @@ class LinkedList<T> {
         const oldAfter: LLNode<T> | null = insertAfter.next;
         insertAfter.next = new LLNode(nodeValue, oldAfter);
     };
+
+    remove(node: LLNode<T>): void {
+        // node must be the exact object and not a copy or other
+        if(node === this.head) {
+            this.head = this.head.next;
+            return;
+        };
+
+        let current = this.head;
+
+        while(current.next) {
+            if(current.next === node) {
+                current.next = node.next;
+                return;
+            }
+            current = current.next;
+        }
+
+        throw Error("Node not present in linked list");
+    };
 };
 
 export { LinkedList, LLNode };

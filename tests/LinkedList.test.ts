@@ -27,4 +27,11 @@ describe("basic usage", () => {
         my_ll.insert(10, my_ll.head);
         expect(my_ll.traverse()).toEqual([1,10,2,3]);
     });
+
+    it("supports removal", () => {
+        const my_ll = new LinkedList<string>(["hi","hello","goodbye"]);
+
+        my_ll.remove(my_ll.head.next);
+        expect(my_ll.traverse()).toEqual(["hi","goodbye"])
+    });
 });
