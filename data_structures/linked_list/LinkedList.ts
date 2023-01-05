@@ -1,3 +1,5 @@
+import { isNamedExportBindings } from "typescript";
+
 class LLNode<T> {
     next: LLNode<T> | null;
     value: T;
@@ -71,7 +73,19 @@ class LinkedList<T> {
         return this.traverse().length;
     };
 
-    
+    access(index: number) {
+        let current = this.head;
+
+        for(let i=0; i<index;i++) {
+            if(current.next) {
+                current = current.next;
+            } else {
+                throw Error("index out of range");
+            }
+        }
+
+        return current;
+    }
 };
 
 export { LinkedList, LLNode };

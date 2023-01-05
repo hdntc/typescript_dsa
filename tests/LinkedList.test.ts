@@ -34,4 +34,10 @@ describe("basic usage", () => {
         my_ll.remove(my_ll.head.next);
         expect(my_ll.traverse()).toEqual(["hi","goodbye"])
     });
+
+    it("supports index access", () => {
+        const my_ll = new LinkedList<string>(["hello","goodbye","okay"]);
+
+        expect(my_ll.access(2).value).toBe("okay");
+    })
 });
