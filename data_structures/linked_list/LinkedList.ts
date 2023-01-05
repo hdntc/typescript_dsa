@@ -23,6 +23,17 @@ class LinkedList {
         } else {
             this.head = new LLNode(initial);
         }
+    };
+    traverse(): any[] {
+        const result = [this.head.value];
+        let current = this.head;
+
+        while(current.next) {
+            result.push(current.next.value);
+            current = current.next;
+        };
+        
+        return result;
     }
 };
 

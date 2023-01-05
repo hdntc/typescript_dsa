@@ -14,4 +14,11 @@ describe("basic usage", () => {
         expect(my_ll.head.value).toBe(3);
         expect(my_ll.head.next).toBe(null);
     });
+
+    it("supports traversal w/ array initialization", () => {
+        const my_ll = new LinkedList([1,2,3]);
+        console.log(my_ll.traverse());
+
+        expect(my_ll.traverse()).toEqual([1,2,3]);
+    });
 });
