@@ -1,15 +1,15 @@
-class LLNode {
-    next: LLNode | null;
-    value: any;
-    constructor(value: any, next: LLNode | null = null) {
+class LLNode<T> {
+    next: LLNode<T> | null;
+    value: T;
+    constructor(value: T, next: LLNode<T> | null = null) {
         this.value = value;
         this.next = next;
     };
 };
 
-class LinkedList {
-    head: LLNode;
-    constructor(initial: any[] | any | LLNode) {
+class LinkedList<T> {
+    head: LLNode<T>;
+    constructor(initial: T[] | T | LLNode<T>) {
         if(initial instanceof Array) {
             const nodification = initial.map(element => new LLNode(element));
             
@@ -25,7 +25,7 @@ class LinkedList {
         }
     };
 
-    traverse(): any[] {
+    traverse(): T[] {
         const result = [this.head.value];
         let current = this.head;
 
@@ -37,9 +37,9 @@ class LinkedList {
         return result;
     };
 
-    insert(nodeValue: any, insertAfter: LLNode): void {
+    insert(nodeValue: T, insertAfter: LLNode<T>): void {
         // places new node w/ value nodeValue after insertAfter node
-        const oldAfter: LLNode | null = insertAfter.next;
+        const oldAfter: LLNode<T> | null = insertAfter.next;
         insertAfter.next = new LLNode(nodeValue, oldAfter);
     };
 };
