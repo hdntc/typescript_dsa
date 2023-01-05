@@ -66,6 +66,12 @@ class LinkedList<T> {
 
         throw Error("Node not present in linked list");
     };
+
+    length(): number {
+        return this.traverse().length;
+    };
+
+    
 };
 
 export { LinkedList, LLNode };
