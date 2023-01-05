@@ -39,5 +39,11 @@ describe("basic usage", () => {
         const my_ll = new LinkedList<string>(["hello","goodbye","okay"]);
 
         expect(my_ll.access(2).value).toBe("okay");
-    })
+    });
+
+    it("throws error when trying to access large index", () => {
+        const my_ll = new LinkedList<string>(["hi"]);
+
+        expect(() => my_ll.access(3)).toThrow(Error("index out of range"));
+    });
 });
