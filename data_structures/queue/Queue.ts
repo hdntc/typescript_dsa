@@ -1,6 +1,7 @@
 import { LLNode, LinkedList, notLLNode } from "../linked_list/LinkedList";
 
 class Queue<T> extends LinkedList<T> {
+    // head -> head.next -> ... -> rear.prev -> rear
     rear: LLNode<T>;
     maxLength: null | number;
     constructor(initial: notLLNode<T>[] | notLLNode<T> | LLNode<T>, maxLength?: number) {
@@ -21,7 +22,7 @@ class Queue<T> extends LinkedList<T> {
             this.maxLength = null;
         }
 
-        this.rear = this.access(0);
+        this.rear = this.access(this.length()-1);
     }
 
     enqueue(value: T): void {
@@ -29,7 +30,8 @@ class Queue<T> extends LinkedList<T> {
             throw Error("Queue at maximum capacity");
         } else {
             const newRear = new LLNode(value);
-            newRear.next = this.rear;
+            this.rear.next = newRear;
+            newRear.prev = this.rear;
             this.rear = newRear;
         }
     };
