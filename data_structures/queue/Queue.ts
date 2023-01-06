@@ -37,8 +37,8 @@ class Queue<T> extends LinkedList<T> {
     };
 
     dequeue(): void {
-        this.head.prev.next = null;
-        this.head = this.head.prev;
+        this.head.next.prev = null;
+        this.head = this.head.next;
     }
 };
 
