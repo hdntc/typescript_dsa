@@ -2,6 +2,7 @@ import { isNamedExportBindings } from "typescript";
 
 class LLNode<T> {
     next: LLNode<T> | null;
+    prev: LLNode<T> | null;
     value: T;
     constructor(value: T, next: LLNode<T> | null = null) {
         this.value = value;
@@ -11,7 +12,7 @@ class LLNode<T> {
 
 // the use of notLLNode in the LinkedList constructor ensures that user doesnt
 // erroneously try to construct LL with an array of nodes (the head suffices)
-type notLLNode<T> = T extends LLNode<any> ? never : T; 
+export type notLLNode<T> = T extends LLNode<any> ? never : T; 
 
 class LinkedList<T> {
     head: LLNode<T>;
