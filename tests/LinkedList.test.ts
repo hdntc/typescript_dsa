@@ -46,4 +46,12 @@ describe("basic usage", () => {
 
         expect(() => my_ll.access(3)).toThrow(Error("index out of range"));
     });
+
+    it("throws error when trying to remove node not in LL", () => {
+        const my_ll_A = new LinkedList<number>([1,2,3,4,5]);
+        const my_ll_B = new LinkedList<number>([1,2,3]);
+
+        my_ll_B.access(2).next = my_ll_A.access(0);
+        expect(() => my_ll_A.remove(my_ll_B.access(0))).toThrow(Error("Node not present in linked list"));
+    });
 });
