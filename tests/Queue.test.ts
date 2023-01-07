@@ -29,7 +29,6 @@ describe("basic usage", () => {
     });
 
     it("does not support creation w/ invalid maximum length", () => {
-        // maxLength argument that isnt type number | undefined will be caught by ts 
         expect(() => { const my_failed_queue_A = new Queue<number>(5, 0) })
         .toThrow(Error("maxLength must be a positive integer or undefined"));
 
