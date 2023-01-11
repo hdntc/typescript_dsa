@@ -1,6 +1,7 @@
 {
   "name": "typescript-dsa",
   "description": "Collection of common data structures / algorithms implemented in TypeScript",
+  "version": "v0.0.1",
   "devDependencies": {
     "@types/jest": "^29.2.4"
   },
