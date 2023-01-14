@@ -12,4 +12,22 @@ describe("basic usage", () => {
             const my_hashmap = new Hashmap<string>(["a","b"], ["z", "y", "x"]);
         }).toThrow(Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH));
     });
+
+    it("supports accessing", () => {
+        const my_hashmap = new Hashmap<number>([1,2,3], ["jerry", "broxley", "jomble"]);
+
+        expect(my_hashmap.access("jerry")).toEqual(1);
+    });
+
+    it("supports deletion", () => {
+        const my_hashmap = new Hashmap<number>([10,9,8], ["archibald", "jordan", "jerome"]);
+        
+        expect(my_hashmap.access("jordan")).toBe(9);
+        expect(my_hashmap.access("archibald")).toBe(10);
+        expect(my_hashmap.access("jerome")).toBe(8);
+        my_hashmap.delete("jordan");
+        expect(() => my_hashmap.access("jordan")).toThrow(HashmapErrors.NONEXISTANT_KEY);
+        expect(my_hashmap.access("archibald")).toBe(10);
+        expect(my_hashmap.access("jerome")).toBe(8);
+    });
 });
