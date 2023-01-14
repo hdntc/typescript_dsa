@@ -3,7 +3,9 @@
   "description": "Collection of common data structures / algorithms implemented in TypeScript",
   "version": "v0.0.1",
   "devDependencies": {
-    "@types/jest": "^29.2.4"
+    "@types/jest": "^29.2.4",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4"
   },
   "dependencies": {
     "jest": "^29.3.1",
@@ -11,7 +13,8 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsup algorithms/**/*.ts data_structures/**/*.ts --format cjs,esm --dts"
   },
-  "type":"module"
+  "type": "module"
 }
