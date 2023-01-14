@@ -13,8 +13,7 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "test": "jest",
-    "build": "tsup algorithms/**/*.ts data_structures/**/*.ts --format cjs,esm --dts"
+    "test": "jest"
   },
   "type": "module"
 }
