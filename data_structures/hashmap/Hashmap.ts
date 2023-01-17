@@ -101,6 +101,8 @@ export class Hashmap<T> {
             new_list.head.next = this.buckets[bucket_index].head;
             this.buckets[bucket_index] = new_list;
         }
+
+        this.elements++;
     }
     
     constructor(initial_values: T[], initial_keys: string[], hash_function?: (string) => number, buckets?: number) {
