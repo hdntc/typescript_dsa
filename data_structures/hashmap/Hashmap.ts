@@ -58,6 +58,7 @@ export class Hashmap<T> {
             } else {
                 this.buckets[bucket_index] = null;
             }
+            this.elements--;
             return;
         }
         
@@ -66,6 +67,7 @@ export class Hashmap<T> {
             if(current.value[0] === key) {
                 current.prev.next = current.next;
                 current.next.prev = current.prev;
+                this.elements--;
             }
         }
 

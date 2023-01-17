@@ -30,4 +30,11 @@ describe("basic usage", () => {
         expect(my_hashmap.access("archibald")).toBe(10);
         expect(my_hashmap.access("jerome")).toBe(8);
     });
+
+    it("has 0 load factor when empty", () => {
+        const my_hashmap = new Hashmap<number>([1], ["a"]);
+
+        my_hashmap.delete("a");
+        expect(my_hashmap.load_factor).toBe(0);
+    });
 });
