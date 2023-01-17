@@ -6,17 +6,30 @@ export enum HashmapErrors {
     NONEXISTANT_KEY="Key does not exist in hashmap"
 };
 
+/**
+ * Hashmap class
+ * 
+ * Currently only supports keys of type string
+ * 
+ * @template T - The type of the values in the hashmap.
+ * @todo Add support other types of key
+ * @todo Add load-factor based rehashing
+ * @todo Add hashing by multiplication option
+ */
 export class Hashmap<T> {
-    //currently only supports strings for keys
     buckets: LinkedList<[string, T]>[] = []; // supports chaining
     keys: string[] = [];
     elements: number = 0;
     #hash_function: (key: string) => number;
 
+    /**
+     * Default hash function used when user does not specify their own
+     * 
+     * Based on Java's `hashCode`
+     * @param key
+     * @returns The hash digest of `key`
+     */
     private _default_hash_function(key: string): number {
-        // return hashed representation of key parameter
-        // the return value is NOT the array index of the value, (return value) MOD this.values.length is
-        // based on Java's hashCode
         var hash = 0;
         var i = 0;
         var len = key.length;
@@ -28,6 +41,11 @@ export class Hashmap<T> {
         return hash;
     };
 
+    /**
+     * Passes hash digest of key through modulo operation to get bucket index
+     * @param key - The key
+     * @returns The index of the corresponding bucket in {@link Hashmap.buckets this.buckets}
+     */
     private _get_bucket_index(key): number {
         const hash = this.#hash_function(key);
         const n = this.buckets.length;
@@ -35,6 +53,12 @@ export class Hashmap<T> {
         return ((hash % n) + n) % n;
     };
 
+    /**
+     * Computed property for the {@link https://en.wikipedia.org/wiki/Hash_table#Load_factor load factor} of the hashmap
+     * 
+     * Target value for optimal performance is around 0.60 - 0.75
+     * @returns The load factor
+     */
     get load_factor(): number {
         return this.elements / this.buckets.length;
     };
@@ -43,6 +67,10 @@ export class Hashmap<T> {
         return this.keys.length;
     };
 
+    /**
+     * Removes the entry with the specified `key`. This is an in-place operation.
+     * @param key 
+     */
     delete(key: string): void {
         const bucket_index = this._get_bucket_index(key);
 
