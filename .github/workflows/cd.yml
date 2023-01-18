@@ -9,13 +9,17 @@ on:
 jobs:
   publish_npm:
     runs-on: ubuntu-latest
-    shell: bash
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Publish to NPM
         run: npm publish # This will fail w/ if the version number in package.json is not updated (i.e. if same as on npm)
   deploy_github_pages:
     runs-on: ubuntu-latest
-    shell: bash
+    defaults:
+      run:
+        shell: bash
     needs: [publish_npm]
     steps:
       - name: Deploy documentatin to GitHub Pages
