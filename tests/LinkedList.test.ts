@@ -58,7 +58,7 @@ describe("basic usage", () => {
     it("correctly calculates length", () => {
         const my_ll = new LinkedList<number>([10,9,8]);
 
-        expect(my_ll.length).toBe(5);
+        expect(my_ll.length).toBe(3);
         my_ll.remove(my_ll.head as LLNode<number>);
         expect(my_ll.length).toBe(2);
         my_ll.insert(10, (my_ll.head as LLNode<number>).next as LLNode<number>);
