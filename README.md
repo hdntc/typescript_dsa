@@ -2,6 +2,8 @@
 
 Repository for implementations for a good number of data structures and algorithms in TypeScript
 
+For more information, see the [documentation](https://hdntc.github.io/typescript_dsa)
+
 # Contributions
 
 Contributions are more than welcome :) 
@@ -19,4 +21,4 @@ Contributions are more than welcome :)
 Changes to pre-existing implementations are also welcome :]
 
 ### If you find a typo in documentation:
-This repo uses typedoc to generate documentation from JSDoc comments, so please fix typos directly in the code. Then submit a pull request.
+This repo uses [TypeDoc](https://github.com/TypeStrong/typedoc) to generate documentation from [JSDoc](https://jsdoc.app/)  comments, so please fix typos directly in the code and submit a pull request. Please do not directly edit files in the docs directory.
