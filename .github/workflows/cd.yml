@@ -28,7 +28,10 @@ jobs:
         shell: bash
     needs: [publish_npm]
     steps:
-      - name: Deploy documentatin to GitHub Pages
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Deploy documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs
