@@ -31,6 +31,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Build docs
+        run: npm run typedoc
+
       - name: Deploy documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
