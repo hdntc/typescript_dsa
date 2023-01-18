@@ -31,6 +31,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Install packages
+        run: npm install
+
       - name: Build docs
         run: npm run typedoc
 
