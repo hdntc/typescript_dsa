@@ -14,7 +14,7 @@ jobs:
         shell: bash
     steps:
       - name: Set .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${secrets.NPM_TOKEN}" > ~/.npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Checkout the repo
         uses: actions/checkout@v3
