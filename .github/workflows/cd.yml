@@ -13,6 +13,9 @@ jobs:
       run:
         shell: bash
     steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+
       - name: Publish to NPM
         run: npm publish # This will fail w/ if the version number in package.json is not updated (i.e. if same as on npm)
   deploy_github_pages:
