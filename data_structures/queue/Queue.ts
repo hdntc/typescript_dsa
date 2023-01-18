@@ -22,11 +22,11 @@ class Queue<T> extends LinkedList<T> {
             this.maxLength = null;
         }
 
-        this.rear = this.access(this.length()-1);
+        this.rear = this.access(this.length-1);
     }
 
     enqueue(value: T): void {
-        if(this.length() === this.maxLength) {
+        if(this.length === this.maxLength) {
             throw Error("Queue at maximum capacity");
         } else {
             const newRear = new LLNode(value);
