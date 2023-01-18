@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
-        "strict": false,
+        "strict": true,
         "target": "ES6",
         "moduleResolution": "node"
     },
     "include": [
         "./algorithms/**/*.ts",
-        "./data_structures/**/*.ts"
+        "./data_structures/**/*.ts",
+        "./tests/**/*.ts"
     ]
 }
