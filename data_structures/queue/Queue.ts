@@ -37,7 +37,15 @@ class Queue<T> extends LinkedList<T> {
     };
 
     dequeue(): void {
-        this.head.next.prev = null;
+        if(!this.head) {
+            throw Error("dequeueing empty queue");
+        }
+
+        if(this.head.next) {
+            this.head.next.prev = null;
+            this.head = this.head.next;
+        } 
+        
         this.head = this.head.next;
     }
 };

@@ -1,10 +1,11 @@
 import { Queue } from "../data_structures/queue/Queue";
+import { LLNode } from "../data_structures/linked_list/LinkedList";
 
 describe("basic usage", () => {
     it("supports singleton initialization", () => {
         const my_queue = new Queue(5);
 
-        expect(my_queue.head.value).toBe(5);
+        expect((my_queue.head as LLNode<number>).value).toBe(5);
         expect(my_queue.rear.value).toBe(5);
     });
 

@@ -1,6 +1,6 @@
 class LLNode<T> {
-    next: LLNode<T> | null;
-    prev: LLNode<T> | null;
+    next: LLNode<T> | null = null;
+    prev: LLNode<T> | null = null;
     value: T;
     constructor(value: T, next: LLNode<T> | null = null) {
         this.value = value;
@@ -13,7 +13,7 @@ class LLNode<T> {
 export type notLLNode<T> = T extends LLNode<any> ? never : T; 
 
 class LinkedList<T> {
-    head: LLNode<T>;
+    head: LLNode<T> | null;
     constructor(initial: notLLNode<T>[] | notLLNode<T> | LLNode<T>) {
         if(initial instanceof Array) {
             const nodification = initial.map(element => new LLNode(element));
@@ -31,6 +31,10 @@ class LinkedList<T> {
     };
 
     traverse(): T[] {
+        if(!this.head) {
+            return [];
+        }
+
         const result = [this.head.value];
         let current = this.head;
 
@@ -50,6 +54,10 @@ class LinkedList<T> {
 
     remove(node: LLNode<T>): void {
         // node must be the exact object and not a copy or other
+        if(!this.head) {
+            throw Error("Node not present in linked list");
+        }
+
         if(node === this.head) {
             this.head = this.head.next;
             return;
@@ -73,6 +81,10 @@ class LinkedList<T> {
     };
 
     access(index: number) {
+        if(!this.head) {
+            throw Error("index out of range");
+        }
+
         let current = this.head;
 
         for(let i=0; i<index;i++) {

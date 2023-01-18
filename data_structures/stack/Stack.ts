@@ -4,7 +4,7 @@ class Stack<T> {
         if(this.content.length === 0) {
             throw Error("Stack is empty");
         } else {
-            return this.content.pop();
+            return this.content.pop() as T; // this as is safe b.c. pop() only returns undefined when array is empty
         }
     };
     push(top: T): void {

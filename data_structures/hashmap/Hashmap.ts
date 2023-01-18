@@ -110,7 +110,7 @@ export class Hashmap<T> {
             throw Error(HashmapErrors.NONEXISTANT_KEY);
         }
 
-        let current: LLNode<[string, T]> = resulstant_bucket.head;
+        let current: LLNode<[string, T]> = resulstant_bucket.head as LLNode<[string, T]>; // safe
         if(current.value[0] === key) {
             if(current.next) {
                 this.buckets[bucket_index] = new LinkedList<[string, T]>(current.next);
@@ -149,7 +149,7 @@ export class Hashmap<T> {
             throw Error(HashmapErrors.NONEXISTANT_KEY);
         }
 
-        let current: LLNode<[string, T]> = resulstant_bucket.head;
+        let current: LLNode<[string, T]> = resulstant_bucket.head as LLNode<[string, T]>;
         if(current.value[0] === key) return current.value[1];
         
         while(current.next !== null) {
@@ -174,8 +174,8 @@ export class Hashmap<T> {
             this.buckets[bucket_index] = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
         } else {
             const new_list = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
-            resulstant_bucket.head.prev = new_list.head;
-            new_list.head.next = resulstant_bucket.head;
+            (<LLNode<[string, T]>>resulstant_bucket.head).prev = new_list.head; // safe b.c. would only be null if resultant_bucket were null
+            (<LLNode<[string, T]>>new_list.head).next = resulstant_bucket.head; // safe b.c. new_list is initialized with an LLNode
             resulstant_bucket = new_list;
         }
 
