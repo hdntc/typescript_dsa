@@ -214,9 +214,5 @@ export class Hashmap<T> {
         for(let i=0;i<initial_values.length;i++) {
             this.insert(initial_values[i], initial_keys[i]);
         }
-
-        this.buckets.forEach(b => {
-            if(b) console.log(b.traverse());
-        });
     };
 };
