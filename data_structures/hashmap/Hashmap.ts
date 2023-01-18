@@ -26,7 +26,7 @@ export class Hashmap<T> {
      * 
      * When all entries in an LL bucket are removed, the corresponding entry in the array becomes `null`; see {@link Hashmap.delete delete}
      */
-    buckets: LinkedList<[string, T]>[] = [];
+    buckets: (LinkedList<[string, T]>|null)[] = [];
     /**
      * The keys used in the hashmap
      */
@@ -73,7 +73,7 @@ export class Hashmap<T> {
      * @param key - The key
      * @returns The index of the corresponding bucket in {@link Hashmap.buckets this.buckets}
      */
-    private _get_bucket_index(key): number {
+    private _get_bucket_index(key: string): number {
         const hash = this.#hash_function(key);
         const n = this.buckets.length;
 
@@ -104,12 +104,13 @@ export class Hashmap<T> {
      */
     delete(key: string): void {
         const bucket_index = this._get_bucket_index(key);
+        const resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
-        if(this.buckets[bucket_index] === null) {
+        if(resulstant_bucket === null) {
             throw Error(HashmapErrors.NONEXISTANT_KEY);
         }
 
-        let current: LLNode<[string, T]> = this.buckets[bucket_index].head;
+        let current: LLNode<[string, T]> = resulstant_bucket.head;
         if(current.value[0] === key) {
             if(current.next) {
                 this.buckets[bucket_index] = new LinkedList<[string, T]>(current.next);
@@ -124,8 +125,8 @@ export class Hashmap<T> {
         while(current.next !== null) {
             current = current.next;
             if(current.value[0] === key) {
-                current.prev.next = current.next;
-                current.next.prev = current.prev;
+                (current.prev as LLNode<[string, T]>).next = current.next;
+                (current.next as LLNode<[string, T]>).prev = current.prev;
                 this.elements--;
             }
         }
@@ -142,12 +143,13 @@ export class Hashmap<T> {
      */
     access(key: string): T {
         const bucket_index = this._get_bucket_index(key);
+        const resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
-        if(this.buckets[bucket_index] === null) {
+        if(resulstant_bucket === null) {
             throw Error(HashmapErrors.NONEXISTANT_KEY);
         }
 
-        let current: LLNode<[string, T]> = this.buckets[bucket_index].head;
+        let current: LLNode<[string, T]> = resulstant_bucket.head;
         if(current.value[0] === key) return current.value[1];
         
         while(current.next !== null) {
@@ -166,14 +168,15 @@ export class Hashmap<T> {
      */
     insert(value: T, key: string) {
         const bucket_index = this._get_bucket_index(key);
+        let resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
-        if(this.buckets[bucket_index] === null) {
+        if(resulstant_bucket === null) {
             this.buckets[bucket_index] = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
         } else {
             const new_list = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
-            this.buckets[bucket_index].head.prev = new_list.head;
-            new_list.head.next = this.buckets[bucket_index].head;
-            this.buckets[bucket_index] = new_list;
+            resulstant_bucket.head.prev = new_list.head;
+            new_list.head.next = resulstant_bucket.head;
+            resulstant_bucket = new_list;
         }
 
         this.elements++;
@@ -186,7 +189,7 @@ export class Hashmap<T> {
      * @param [hash_function] The hash function to use. If not specified, uses an {@link Hashmap._default_hash_function internal default} equivalent to Java's `hashCode` function
      * @param [buckets] The number of initial buckets. If not specified, uses `ceil(1.5 * initial_keys.length)`
      */
-    constructor(initial_values: T[], initial_keys: string[], hash_function?: (string) => number, buckets?: number) {
+    constructor(initial_values: T[], initial_keys: string[], hash_function?: (key: string) => number, buckets?: number) {
         if(initial_values.length !== initial_keys.length) {
             throw Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH);
         }
