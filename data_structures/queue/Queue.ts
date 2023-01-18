@@ -43,9 +43,8 @@ class Queue<T> extends LinkedList<T> {
 
         if(this.head.next) {
             this.head.next.prev = null;
-            this.head = this.head.next;
         } 
-        
+
         this.head = this.head.next;
     }
 };
