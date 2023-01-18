@@ -9,23 +9,48 @@ export enum HashmapErrors {
 /**
  * Hashmap class
  * 
- * Currently only supports keys of type string
+ * Currently supports collision resolution by chaining, hashing by modulo and string keys
  * 
  * @template T - The type of the values in the hashmap.
- * @todo Add support other types of key
+ * @todo Add support for other types of key
  * @todo Add load-factor based rehashing
  * @todo Add hashing by multiplication option
  */
 export class Hashmap<T> {
-    buckets: LinkedList<[string, T]>[] = []; // supports chaining
+    /**
+     * The buckets of the hashmap
+     * 
+     * This is an array of {@link LinkedList}s of entries which represented as a tuples of `[string, T]`
+     * 
+     * When an entry is inserted, it will become the head of the corresponding LL
+     * 
+     * When all entries in an LL bucket are removed, the corresponding entry in the array becomes `null`; see {@link Hashmap.delete delete}
+     */
+    buckets: LinkedList<[string, T]>[] = [];
+    /**
+     * The keys used in the hashmap
+     */
     keys: string[] = [];
+    /**
+     * The number of entries present in the hashmap
+     * 
+     * Used to calculate {@link Hashmap.load_factor load factor}
+     */
     elements: number = 0;
+    /**
+     * The hash function used
+     * 
+     * User can specify their own, else defaults to {@link Hashmap._default_hash_function _default_hash_function}
+     * 
+     * The hash digest returned by this function is combined with the number of {@link Hashmap.buckets buckets} to {@link Hashmap._get_bucket_index get the corresponding bucket index for the entry}
+     */
     #hash_function: (key: string) => number;
 
     /**
      * Default hash function used when user does not specify their own
      * 
      * Based on Java's `hashCode`
+     * @private
      * @param key
      * @returns The hash digest of `key`
      */
@@ -42,7 +67,9 @@ export class Hashmap<T> {
     };
 
     /**
+     * 
      * Passes hash digest of key through modulo operation to get bucket index
+     * @private
      * @param key - The key
      * @returns The index of the corresponding bucket in {@link Hashmap.buckets this.buckets}
      */
@@ -69,6 +96,10 @@ export class Hashmap<T> {
 
     /**
      * Removes the entry with the specified `key`. This is an in-place operation.
+     * 
+     * If the result of this operation would lead to an empty LL the LL will become `null`
+     * 
+     * @throws {@link HashmapErrors.NONEXISTANT_KEY NONEXISTANT_KEY}
      * @param key 
      */
     delete(key: string): void {
@@ -102,6 +133,13 @@ export class Hashmap<T> {
         throw Error(HashmapErrors.NONEXISTANT_KEY);
     }
 
+    /**
+     * Accesses the hashmap to get the value with the corresponding `key`
+     * 
+     * @param key 
+     * @throws {@link HashmapErrors.NONEXISTANT_KEY NONEXISTANT_KEY}
+     * @returns The corresponding value
+     */
     access(key: string): T {
         const bucket_index = this._get_bucket_index(key);
 
@@ -120,6 +158,12 @@ export class Hashmap<T> {
         throw Error(HashmapErrors.NONEXISTANT_KEY);
     }
 
+    /**
+     * Inserts the entry into the hashmap
+     * @param value 
+     * @param key
+     * @todo check for pre-existence
+     */
     insert(value: T, key: string) {
         const bucket_index = this._get_bucket_index(key);
 
@@ -135,6 +179,13 @@ export class Hashmap<T> {
         this.elements++;
     }
     
+    /**
+     * @constructor
+     * @param initial_values An array of initial values for the hashmap. Must be the same length as `initial_keys`
+     * @param initial_keys An array of initial keys for the hashmap. Must be the same length as `initial_values`
+     * @param [hash_function] The hash function to use. If not specified, uses an {@link Hashmap._default_hash_function internal default} equivalent to Java's `hashCode` function
+     * @param [buckets] The number of initial buckets. If not specified, uses `ceil(1.5 * initial_keys.length)`
+     */
     constructor(initial_values: T[], initial_keys: string[], hash_function?: (string) => number, buckets?: number) {
         if(initial_values.length !== initial_keys.length) {
             throw Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH);

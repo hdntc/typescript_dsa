@@ -5,13 +5,16 @@
   "devDependencies": {
     "@types/jest": "^29.2.4",
     "jest": "^29.3.1",
-    "ts-jest": "^29.0.3"
+    "jsdoc": "^4.0.0",
+    "ts-jest": "^29.0.3",
+    "typedoc": "^0.23.24"
   },
   "dependencies": {
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "typedoc": "./node_modules/.bin/typedoc --entryPointStrategy expand --out docs/ ./data_structures/ ./algorithms/"
   },
   "type": "module"
 }
