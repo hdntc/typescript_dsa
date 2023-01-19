@@ -16,5 +16,17 @@
     "test": "jest",
     "typedoc": "./node_modules/.bin/typedoc --entryPointStrategy expand --out docs/ ./data_structures/ ./algorithms/"
   },
-  "type": "module"
+  "type": "module",
+  "keywords": [
+    "typescript",
+    "ts",
+    "data structure",
+    "algorithm",
+    "dsa",
+    "stack",
+    "linked list",
+    "queue",
+    "hash map",
+    "hash table"
+  ]
 }
