@@ -1,9 +1,31 @@
 import { LLNode, LinkedList, notLLNode } from "../linked_list/LinkedList";
 
+/**
+ * This inherits from {@link LinkedList} with two extra properties for a {@link Queue.rear rear node} and {@link Queue.maxLength max length}.
+ * 
+ * It also implements common actions on queues such as {@link Queue.enqueue enqueue} and {@link Queue.dequeue dequeue}.
+ * 
+ * @template T The type of the satellite data.
+ */
 class Queue<T> extends LinkedList<T> {
-    // head -> head.next -> ... -> rear.prev -> rear
+    /**
+     * Represents the last item in the queue.
+     * 
+     * This value changes when {@link Queue.enqueue enqueue} is called.
+     */
     rear: LLNode<T>;
+    /**
+     * The maximum number of items in the queue at any given time.
+     * 
+     * If `null`, there will be no restriction to the number of items.
+     */
     maxLength: null | number;
+    /**
+     * @constructor
+     * @param initial The initial value(s) with which to initialize the queue. See {@link LinkedList}.
+     * @param maxLength The maximum number of items in the queue. If not provided, there will be no limit.
+     * @throws When an invalid value for maxLength is provided.
+     */
     constructor(initial: notLLNode<T>[] | notLLNode<T> | LLNode<T>, maxLength?: number) {
         super(initial);
 
@@ -25,6 +47,15 @@ class Queue<T> extends LinkedList<T> {
         this.rear = this.access(this.length-1);
     }
 
+    /**
+     * Places a new value in the queue. 
+     * 
+     * This inserts a new {@link LLNode} after the current rear.
+     * 
+     * To enqueue at an arbitrary position in the queue, see {@link LinkedList.insert}
+     * @param value The value to enqueue.
+     * @throws Throws when trying to add to a full queue.
+     */
     enqueue(value: T): void {
         if(this.length === this.maxLength) {
             throw Error("Queue at maximum capacity");
@@ -36,6 +67,11 @@ class Queue<T> extends LinkedList<T> {
         }
     };
 
+    /**
+     * Dequeues the head of the queue.
+     * 
+     * @throws When the queue is already empty.
+     */
     dequeue(): void {
         if(!this.head) {
             throw Error("dequeueing empty queue");
