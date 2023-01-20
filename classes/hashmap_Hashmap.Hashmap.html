@@ -38,7 +38,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Hashmap</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L19">hashmap/Hashmap.ts:19</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L26">hashmap/Hashmap.ts:26</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -73,7 +73,7 @@
 <section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_Hashmap">new <wbr/>Hashmap<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>initial_values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span>, initial_keys<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, hash_function<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span>, buckets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="hashmap_Hashmap.Hashmap.html" class="tsd-signature-type" data-tsd-kind="Class">Hashmap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_Hashmap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_Hashmap">new <wbr/>Hashmap<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>initial_values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span>, initial_keys<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">[]</span>, hash_function<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span>, buckets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="hashmap_Hashmap.Hashmap.html" class="tsd-signature-type" data-tsd-kind="Class">Hashmap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_Hashmap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <section class="tsd-panel tsd-type-parameters">
 <h4>Type Parameters</h4>
@@ -88,7 +88,7 @@
 <div class="tsd-comment tsd-typography"><p>An array of initial values for the hashmap. Must be the same length as <code>initial_keys</code></p>
 </div></li>
 <li>
-<h5>initial_keys: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+<h5>initial_keys: <span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">[]</span></h5>
 <div class="tsd-comment tsd-typography"><p>An array of initial keys for the hashmap. Must be the same length as <code>initial_values</code></p>
 </div></li>
 <li>
@@ -112,7 +112,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="hashmap_Hashmap.Hashmap.html" class="tsd-signature-type" data-tsd-kind="Class">Hashmap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L192">hashmap/Hashmap.ts:192</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L206">hashmap/Hashmap.ts:206</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_hash_function" class="tsd-anchor"></a>
@@ -136,7 +136,7 @@
 <h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L47">hashmap/Hashmap.ts:47</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L54">hashmap/Hashmap.ts:54</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="buckets" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>buckets</span><a href="#buckets" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">buckets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="linked_list_LinkedList.LinkedList.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedList</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
@@ -146,7 +146,7 @@
 <p>When all entries in an LL bucket are removed, the corresponding entry in the array becomes <code>null</code>; see <a href="hashmap_Hashmap.Hashmap.html#delete">delete</a></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L29">hashmap/Hashmap.ts:29</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L36">hashmap/Hashmap.ts:36</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="elements" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>elements</span><a href="#elements" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">elements<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
@@ -154,14 +154,14 @@
 <p>Used to calculate <a href="hashmap_Hashmap.Hashmap.html#load_factor">load factor</a></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L39">hashmap/Hashmap.ts:39</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L46">hashmap/Hashmap.ts:46</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="keys" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>keys</span><a href="#keys" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">keys<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 <div class="tsd-comment tsd-typography"><p>The keys used in the hashmap</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L33">hashmap/Hashmap.ts:33</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L40">hashmap/Hashmap.ts:40</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="length" class="tsd-anchor"></a>
@@ -171,7 +171,7 @@
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L93">hashmap/Hashmap.ts:93</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L103">hashmap/Hashmap.ts:103</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="load_factor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>load_<wbr/>factor</span><a href="#load_factor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
@@ -184,13 +184,13 @@
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L89">hashmap/Hashmap.ts:89</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L99">hashmap/Hashmap.ts:99</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_default_hash_function" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_default_<wbr/>hash_<wbr/>function</span><a href="#_default_hash_function" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_default_hash_function._default_hash_function-1">_default_<wbr/>hash_<wbr/>function<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#_default_hash_function._default_hash_function-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="_default_hash_function._default_hash_function-1">_default_<wbr/>hash_<wbr/>function<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#_default_hash_function._default_hash_function-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description"><code class="tsd-tag ts-flagPrivate">Private</code> 
 <div class="tsd-comment tsd-typography"><p>Default hash function used when user does not specify their own</p>
 <p>Based on Java&#39;s <code>hashCode</code></p>
@@ -201,14 +201,14 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L57">hashmap/Hashmap.ts:57</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L64">hashmap/Hashmap.ts:64</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_get_bucket_index" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_get_<wbr/>bucket_<wbr/>index</span><a href="#_get_bucket_index" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_get_bucket_index._get_bucket_index-1">_get_<wbr/>bucket_<wbr/>index<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#_get_bucket_index._get_bucket_index-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="_get_bucket_index._get_bucket_index-1">_get_<wbr/>bucket_<wbr/>index<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#_get_bucket_index._get_bucket_index-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description"><code class="tsd-tag ts-flagPrivate">Private</code> 
 <div class="tsd-comment tsd-typography"><p>Passes hash digest of key through modulo operation to get bucket index</p>
 
@@ -218,16 +218,16 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>key: <span class="tsd-signature-type">string</span></h5>
+<h5>key: <span class="tsd-signature-type">Key</span></h5>
 <div class="tsd-comment tsd-typography"><p>The key</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L76">hashmap/Hashmap.ts:76</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L86">hashmap/Hashmap.ts:86</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="access" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>access</span><a href="#access" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="access.access-1">access<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><a href="#access.access-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="access.access-1">access<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><a href="#access.access-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Accesses the hashmap to get the value with the corresponding <code>key</code></p>
 
@@ -239,14 +239,14 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L144">hashmap/Hashmap.ts:144</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L155">hashmap/Hashmap.ts:155</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="delete" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete</span><a href="#delete" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="delete.delete-1">delete<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#delete.delete-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="delete.delete-1">delete<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#delete.delete-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Removes the entry with the specified <code>key</code>. This is an in-place operation.</p>
 <p>If the result of this operation would lead to an empty LL the LL will become <code>null</code></p>
@@ -257,14 +257,14 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L105">hashmap/Hashmap.ts:105</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L115">hashmap/Hashmap.ts:115</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="insert" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>insert</span><a href="#insert" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="insert.insert-1">insert<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#insert.insert-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="insert.insert-1">insert<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#insert.insert-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Inserts the entry into the hashmap</p>
 
@@ -276,10 +276,10 @@
 <li>
 <h5>value: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h5></li>
 <li>
-<h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/172c0f4/data_structures/hashmap/Hashmap.ts#L169">hashmap/Hashmap.ts:169</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/8519d04/data_structures/hashmap/Hashmap.ts#L181">hashmap/Hashmap.ts:181</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
