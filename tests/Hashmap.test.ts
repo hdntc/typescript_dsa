@@ -37,4 +37,37 @@ describe("basic usage", () => {
         my_hashmap.delete("a");
         expect(my_hashmap.load_factor).toBe(0);
     });
+
+    it("supports access w/ number-key", () => {
+        const my_hashmap = new Hashmap<string>(["jeremy", "davis", "paul"], [10,9,5]);
+
+        my_hashmap.buckets.forEach((x) => {
+            if(x) {console.log(x.traverse())}
+        });
+
+        expect(my_hashmap.access(10)).toBe("jeremy");
+        expect(my_hashmap.access(9)).toBe("davis");
+        expect(my_hashmap.access(5)).toBe("paul");
+    });
+
+    it("supports deletion w/ number key", () => {
+        const my_hashmap = new Hashmap<{name: string}>([{name: "jerry"}, {name: "jack"}], [4,3]);
+
+        my_hashmap.delete(4);
+        expect(my_hashmap.elements).toBe(1);
+    })
+
+    it("supports insertion w/ number key", () => {
+        const my_hashmap = new Hashmap<string>(["jeremy", "davis", "paul"], [10,9,5]);
+
+        my_hashmap.insert("jackson", 11);
+
+        my_hashmap.buckets.forEach((b) => {
+            if(b) {
+                console.log(b.traverse())
+            }
+        });
+
+        expect(my_hashmap.access(11)).toBe("jackson");
+    });
 });

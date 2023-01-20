@@ -7,6 +7,13 @@ export enum HashmapErrors {
 };
 
 /**
+ * Acceptable types for hashmap key
+ * 
+ * Both `number` and `string` implement `.toString()`
+ */
+type Key = number | string;
+
+/**
  * Hashmap class
  * 
  * Currently supports collision resolution by chaining, hashing by modulo and string keys
@@ -54,9 +61,12 @@ export class Hashmap<T> {
      * @param key
      * @returns The hash digest of `key`
      */
-    private _default_hash_function(key: string): number {
+    private _default_hash_function(key: Key): number {
         var hash = 0;
         var i = 0;
+
+        key = key.toString(); 
+
         var len = key.length;
 
         while(i < len) {
@@ -73,8 +83,8 @@ export class Hashmap<T> {
      * @param key - The key
      * @returns The index of the corresponding bucket in {@link Hashmap.buckets this.buckets}
      */
-    private _get_bucket_index(key: string): number {
-        const hash = this.#hash_function(key);
+    private _get_bucket_index(key: Key): number {
+        const hash = this.#hash_function(key.toString());
         const n = this.buckets.length;
 
         return ((hash % n) + n) % n;
@@ -102,7 +112,8 @@ export class Hashmap<T> {
      * @throws {@link HashmapErrors.NONEXISTANT_KEY NONEXISTANT_KEY}
      * @param key 
      */
-    delete(key: string): void {
+    delete(key: Key): void {
+        key = key.toString();
         const bucket_index = this._get_bucket_index(key);
         const resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
@@ -141,7 +152,8 @@ export class Hashmap<T> {
      * @throws {@link HashmapErrors.NONEXISTANT_KEY NONEXISTANT_KEY}
      * @returns The corresponding value
      */
-    access(key: string): T {
+    access(key: Key): T {
+        key = key.toString();
         const bucket_index = this._get_bucket_index(key);
         const resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
@@ -166,7 +178,8 @@ export class Hashmap<T> {
      * @param key
      * @todo check for pre-existence
      */
-    insert(value: T, key: string) {
+    insert(value: T, key: Key) {
+        key = key.toString();
         const bucket_index = this._get_bucket_index(key);
         let resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
@@ -176,7 +189,8 @@ export class Hashmap<T> {
             const new_list = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
             (<LLNode<[string, T]>>resulstant_bucket.head).prev = new_list.head; // safe b.c. would only be null if resultant_bucket were null
             (<LLNode<[string, T]>>new_list.head).next = resulstant_bucket.head; // safe b.c. new_list is initialized with an LLNode
-            resulstant_bucket = new_list;
+            
+            this.buckets[bucket_index] = new_list;
         }
 
         this.elements++;
@@ -189,7 +203,7 @@ export class Hashmap<T> {
      * @param [hash_function] The hash function to use. If not specified, uses an {@link Hashmap._default_hash_function internal default} equivalent to Java's `hashCode` function
      * @param [buckets] The number of initial buckets. If not specified, uses `ceil(1.5 * initial_keys.length)`
      */
-    constructor(initial_values: T[], initial_keys: string[], hash_function?: (key: string) => number, buckets?: number) {
+    constructor(initial_values: T[], initial_keys: Key[], hash_function?: (key: string) => number, buckets?: number) {
         if(initial_values.length !== initial_keys.length) {
             throw Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH);
         }
