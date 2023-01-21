@@ -70,4 +70,16 @@ describe("basic usage", () => {
 
         expect(my_hashmap.access(11)).toBe("jackson");
     });
+
+    it("supports rehashing", () => {
+        const my_hashmap = new Hashmap<string>(["jeremy", "davis", "paul"], [10,9,5]);
+        my_hashmap.rehash(1);
+        expect(my_hashmap.load_factor).toBe(1);
+    });
+
+    it("supports dynamic rehashing", () => {
+        const my_hashmap = new Hashmap<number>([1,2,3], [4,5,6],undefined,undefined,true,0.6,0.75);
+
+        console.log(my_hashmap.valid_elements_range, my_hashmap.buckets)
+    });
 });
