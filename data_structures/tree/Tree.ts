@@ -2,9 +2,15 @@ export class TreeNode<T> {
     value: T;
     children: TreeNode<T>[] = [];
 
-    constructor(initial_value: T, children: TreeNode<T>[]=[]) {
+    constructor(initial_value: T, children: (TreeNode<T> | T)[]=[]) {
         this.value = initial_value;
-        this.children = children;
+
+        const new_children = children.map(child => {
+            if(child instanceof TreeNode) return child;
+            return new TreeNode<T>(child);
+        })
+
+        this.children = new_children;
     }
 };
 
