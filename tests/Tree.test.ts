@@ -35,4 +35,24 @@ describe("basic usage", () => {
 
         expect(dfs_result).toEqual([]);
     });
+
+    it("supports bfs (found)", () => {
+        const my_node = new TreeNode<string>("a", [new TreeNode<string>("a", ["b", "d"]), "a", "c"]);
+
+        const bfs_result = my_node.breadth_first_search("a");
+
+        expect([
+            my_node === bfs_result[0],
+            my_node.children[0] === bfs_result[1],
+            my_node.children[1] === bfs_result[2]
+        ].every(x=>x===true)).toBe(true);
+    });
+
+    it("supports bfs (not found)", () => {
+        const my_node = new TreeNode<string>("a", [new TreeNode<string>("a", ["b", "d"]), "a", "c"]);
+
+        const bfs_result = my_node.breadth_first_search("e");
+
+        expect(bfs_result).toEqual([]);
+    });
 });

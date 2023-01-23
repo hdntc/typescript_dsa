@@ -29,6 +29,38 @@ export class TreeNode<T> {
         return result;
     }
 
+    breadth_first_search(value: T, strict: boolean=true): TreeNode<T>[] {
+        let result: TreeNode<T>[] = [];
+
+        if(strict) {
+            if(value === this.value) result.push(this);
+        } else {
+            if(value == this.value) result.push(this);
+        }
+
+        this.children.forEach(child => {
+            if(strict) {
+                if(child.value === value) result.push(child);
+            } else {
+                if(child.value == value) result.push(child);
+            }
+        });
+
+        this.children.forEach(child => {
+            let child_res = child.breadth_first_search(value, strict);
+
+            if(strict) {
+                if(child.value === value) child_res = child_res.slice(1)
+            } else {
+                if(child.value == value) child_res = child_res.slice(1)
+            }
+
+            result = [...result, ...child_res];
+        });
+
+        return result;
+    }
+
     constructor(initial_value: T, children: (TreeNode<T> | T)[]=[]) {
         this.value = initial_value;
         this.children = children;
