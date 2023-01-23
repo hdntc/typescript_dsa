@@ -1,4 +1,4 @@
-class TreeNode<T> {
+export class TreeNode<T> {
     value: T;
     children: TreeNode<T>[] = [];
 
@@ -8,14 +8,14 @@ class TreeNode<T> {
     }
 };
 
-class Tree<T> {
+export class Tree<T> {
     root: TreeNode<T>;
-    
-    constructor(initial: T | TreeNode<T>) {
-        if(initial instanceof TreeNode) {
-            this.root = initial;
+
+    constructor(root: T | TreeNode<T>) {
+        if(root instanceof TreeNode) {
+            this.root = root;
         } else {
-            this.root = new TreeNode<T>(initial);
+            this.root = new TreeNode<T>(root);
         }
     }
 };
