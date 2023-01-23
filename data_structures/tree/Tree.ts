@@ -1,16 +1,21 @@
 export class TreeNode<T> {
     value: T;
-    children: TreeNode<T>[] = [];
+    #children: TreeNode<T>[] = [];
+
+    get children(): TreeNode<T>[] {
+        return this.#children;
+    }
+
+    set children(new_children: (TreeNode<T> | T)[]) {
+        this.#children = new_children.map(child => {
+            if(child instanceof TreeNode) return child;
+            return new TreeNode<T>(child);
+        });
+    }
 
     constructor(initial_value: T, children: (TreeNode<T> | T)[]=[]) {
         this.value = initial_value;
-
-        const new_children = children.map(child => {
-            if(child instanceof TreeNode) return child;
-            return new TreeNode<T>(child);
-        })
-
-        this.children = new_children;
+        this.children = children;
     }
 };
 
