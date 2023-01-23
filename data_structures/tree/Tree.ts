@@ -1,3 +1,7 @@
+enum TreeErrors {
+    NO_TREENODE_GIVEN="If not removing by node value, must provide a TreeNode as to_remove argument"
+}
+
 export class TreeNode<T> {
     value: T;
     #children: TreeNode<T>[] = [];
@@ -11,6 +15,35 @@ export class TreeNode<T> {
             if(child instanceof TreeNode) return child;
             return new TreeNode<T>(child);
         });
+    }
+
+    /**
+     * Removes one or more child nodes. Does not recurse.
+     * @param to_remove The value or node to remove.
+     * 
+     * - Specify a `TreeNode` when wanting to remove a specific node. 
+     * 
+     * - Specify a value of the generic type to remove any first-level children with the given value.
+     * @param by_value Whether to remove children by value or by strict comparison between TreeNode objects. 
+     * `to_remove` must be a TreeNode if false. When `to_remove` is a TreeNode and this is `true`, removes first-level children based on the value of the given node.
+     * @returns The new list of children.
+     */
+    remove(to_remove: TreeNode<T> | T, by_value: boolean=false): TreeNode<T>[] {
+        if(by_value) {
+            if(to_remove instanceof TreeNode) {
+                this.children = this.children.filter(x => x.value !== to_remove.value);
+            } else {
+                this.children = this.children.filter(x => x.value !== to_remove);
+            }
+        } else {
+            if(!(to_remove instanceof TreeNode)) {
+                throw Error(TreeErrors.NO_TREENODE_GIVEN);
+            }
+
+            this.children = this.children.filter(x => x !== to_remove);
+        }
+
+        return this.children;
     }
 
     depth_first_search(value: T, strict: boolean=true): TreeNode<T>[] {
@@ -29,6 +62,7 @@ export class TreeNode<T> {
         return result;
     }
 
+    // probably suboptimal
     breadth_first_search(value: T, strict: boolean=true): TreeNode<T>[] {
         let result: TreeNode<T>[] = [];
 
