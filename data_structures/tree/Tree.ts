@@ -23,7 +23,7 @@ export class TreeNode<T> {
         }
 
         this.#children.forEach(child => {
-            result = [...result, ...child.depth_first_search(value, true)];
+            result = [...result, ...child.depth_first_search(value, strict)];
         });
 
         return result;
