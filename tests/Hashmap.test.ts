@@ -108,4 +108,24 @@ describe("basic usage", () => {
         my_hashmap.insert(12, 30);
         my_hashmap.insert(10, 35);
     });
+
+    it("supports accessing w/ hash by multiplication", () => {
+        const my_hashmap = new Hashmap<number>({
+            initial_values: [1,2,3],
+            initial_keys: [4,5,6], 
+            hashing_method: "MULTIPLICATION"
+        });
+
+        expect(my_hashmap.access(4)).toBe(1);
+    });
+
+    it("supports removal w/ hash by multiplication", () => {
+        const my_hashmap = new Hashmap<number>({
+            initial_values: [1,2,3,4,5,6,7,8,9,10],
+            initial_keys: [4,5,6,10,2,11,12,13,14,15], 
+            hashing_method: "MULTIPLICATION"
+        });
+
+        expect(() => my_hashmap.delete(5)).not.toThrow(Error);
+    });
 });

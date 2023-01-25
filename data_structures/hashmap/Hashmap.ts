@@ -206,7 +206,9 @@ export class Hashmap<T> {
     }
 
     private _hash_by_multiplication(digest: number, buckets: number): number {
-        return Math.floor(buckets * Math.trunc(digest * (this.#multiplication_factor as number)));
+        const prod = digest * (this.#multiplication_factor as number);
+        const frac = prod - ~~prod;
+        return Math.floor(buckets * frac);
     }
 
     /**
@@ -254,7 +256,6 @@ export class Hashmap<T> {
             }
 
             wanted_num_buckets = Math.ceil(this.elements / desired);
-            console.log("DESIRED IS",desired);
         } else {
             wanted_num_buckets = desired;
         }
@@ -306,7 +307,6 @@ export class Hashmap<T> {
             // This might happen when the hm is small
             // Namely, when 2E/B <== m+M < 2E/(B-1) where E is # elements, B is current # buckets, m is min LF, M is max LF
             if(new_buckets === current_num_buckets) {
-                console.log("Equals condition")
                 if(this.elements - 1 < (<[number, number]>this.valid_elements_range)[1]) {
                     this.rehash(current_num_buckets - 1, true);
                 }
@@ -410,7 +410,6 @@ export class Hashmap<T> {
             // This might happen when the hm is small
             // Namely, when 2E/B <== m+M < 2E/(B-1) where E is # elements, B is current # buckets, m is min LF, M is max LF
             if(new_buckets === current_num_buckets) {
-                console.log("Equals condition")
                 if(this.elements + 1 > (<[number, number]>this.valid_elements_range)[1]) {
                     this.rehash(current_num_buckets + 1, true);
                 }
@@ -452,8 +451,10 @@ export class Hashmap<T> {
         if(hashing_method === "MODULO") {
             if(typeof config.multiplication_factor !== "undefined") throw Error(HashmapErrors.MULTIPLICATION_FACTOR_PROVIDED_MODULO);
         } else {
-            if(typeof config.multiplication_factor !== "undefined") {
+            if(typeof config.multiplication_factor === "undefined") {
                 this.#multiplication_factor = 0.618;
+            } else {
+                this.#multiplication_factor = config.multiplication_factor;
             }
         }
 
