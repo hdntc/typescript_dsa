@@ -1,16 +1,16 @@
-import { TreeNode } from "../data_structures/tree/Tree";
+import { Tree } from "../data_structures/tree/Tree";
 
 describe("basic usage", () => {
     it("supports children", () => {
-        const my_node = new TreeNode<number>(5, [1, 3, 5, new TreeNode(2), new TreeNode(5)]);
+        const my_node = new Tree<number>(5, [1, 3, 5, new Tree(2), new Tree(5)]);
 
         expect(my_node.children.map(child => child.value)).toEqual([1,3,5,2,5]);
     });
 
     it("supports dfs (nodes found)", () => {
-        const my_node = new TreeNode<number>(5, [5, 7, new TreeNode(10, [5, 7, 2, 5])]);
+        const my_node = new Tree<number>(5, [5, 7, new Tree(10, [5, 7, 2, 5])]);
 
-        const dfs_result: TreeNode<number>[] = my_node.depth_first_search(5, true);
+        const dfs_result: Tree<number>[] = my_node.depth_first_search(5, true);
 
         expect([
             my_node === dfs_result[0],
@@ -21,15 +21,15 @@ describe("basic usage", () => {
     })
 
     it("supports dfs (node not found)", () => {
-        const my_node = new TreeNode<number>(5);
+        const my_node = new Tree<number>(5);
 
-        const dfs_result: TreeNode<number>[] = my_node.depth_first_search(3);
+        const dfs_result: Tree<number>[] = my_node.depth_first_search(3);
 
         expect(dfs_result).toEqual([]);
     });
 
     it("supports bfs (found)", () => {
-        const my_node = new TreeNode<string>("a", [new TreeNode<string>("a", ["b", "d"]), "a", "c"]);
+        const my_node = new Tree<string>("a", [new Tree<string>("a", ["b", "d"]), "a", "c"]);
 
         const bfs_result = my_node.breadth_first_search("a");
 
@@ -41,7 +41,7 @@ describe("basic usage", () => {
     });
 
     it("supports bfs (not found)", () => {
-        const my_node = new TreeNode<string>("a", [new TreeNode<string>("a", ["b", "d"]), "a", "c"]);
+        const my_node = new Tree<string>("a", [new Tree<string>("a", ["b", "d"]), "a", "c"]);
 
         const bfs_result = my_node.breadth_first_search("e");
 
@@ -49,7 +49,7 @@ describe("basic usage", () => {
     });
 
     it("supports depth-first filter", () => {
-        const my_node = new TreeNode<string>("a", [new TreeNode<string>("a", ["bb", "d"]), "ad", "cde"]);
+        const my_node = new Tree<string>("a", [new Tree<string>("a", ["bb", "d"]), "ad", "cde"]);
 
         const dfs_result = my_node.depth_first_filter(node => node.value.length===3);
 
