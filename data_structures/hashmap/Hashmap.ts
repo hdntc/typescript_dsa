@@ -9,7 +9,8 @@ export enum HashmapErrors {
     DESIRED_LOAD_FACTOR_OUT_OF_BOUNDS="The provided value for the desired load factor is not within the min/max bounds.",
     LOAD_FACTOR_BOUNDS_PROVIDED_WITHOUT_DYNAMIC_REHASHING="Dynamic rehashing must be enabled to set min/max load factor bounds.",
     UNBOUNDED_DYNAMIC_REHASH="min_load_factor and max_load_factor must both be non-null to dynamically rehash.",
-    NO_BUCKETS="There are no buckets."
+    NO_BUCKETS="There are no buckets.",
+    MULTIPLICATION_FACTOR_PROVIDED_MODULO="hashing_method must be 'MULTIPLICATION' in order to use a multiplication factor."
 };
 
 /**
@@ -74,6 +75,18 @@ type HashmapConfig<T> =  {
      * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.75`.
      */
     max_load_factor?: number,
+    /**
+     * The method of hashing to use.
+     * If not provided, defaults to `MODULO`.
+     * @see {@link https://en.wikipedia.org/wiki/Hash_table#Hashing_by_division Wikipedia}
+     */
+    hashing_method?: "MODULO" | "MULTIPLICATION"
+    /**
+     * The multiplication factor to use when using hashing by multiplication.
+     * - Must be between `0` and `1`.
+     * - When not provided when `hashing_method` is `MULTIPLICATION`, defaults to `0.618` (the reciprocal of the golden ratio). 
+     */
+    multiplication_factor?: number
 };
 
 /**
@@ -139,6 +152,14 @@ export class Hashmap<T> {
      * This is done to prevent a rehash causing another rehash.
      */
     #stop_rehash_loop: boolean = true;
+    /**
+     * The hashing method to use.
+     */
+    #hashing_method: "MODULO" | "MULTIPLICATION";
+    /**
+     * Multiplication factor for hashing by multiplication (if used.)
+     */
+    #multiplication_factor: number | null = null;
 
     /**
      * Default hash function used when user does not specify their own
@@ -172,10 +193,21 @@ export class Hashmap<T> {
     private _get_bucket_index(key: Key): number {
         const n = this.buckets.length;
         if(n === 0) throw Error(HashmapErrors.NO_BUCKETS);
-        const hash = this.#hash_function(key.toString());
 
-        return ((hash % n) + n) % n;
+        const digest = this.#hash_function(key.toString());
+
+        return this.#hashing_method === "MODULO" ? 
+            this._hash_by_modulo(digest, n) : 
+            this._hash_by_multiplication(digest, n);
     };
+
+    private _hash_by_modulo(digest: number, buckets: number): number {
+        return ((digest % buckets) + buckets) % buckets;
+    }
+
+    private _hash_by_multiplication(digest: number, buckets: number): number {
+        return Math.floor(buckets * Math.trunc(digest * (this.#multiplication_factor as number)));
+    }
 
     /**
      * Rehashes the hash table if the {@link Hashmap.load_factor load factor} falls outside the min/max bounds.
@@ -412,6 +444,17 @@ export class Hashmap<T> {
     constructor(config: HashmapConfig<T>) {
         if(config.initial_values.length !== config.initial_keys.length) {
             throw Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH);
+        }
+
+        const hashing_method: "MODULO" | "MULTIPLICATION" = config.hashing_method ? config.hashing_method : "MODULO";
+        this.#hashing_method = hashing_method;
+
+        if(hashing_method === "MODULO") {
+            if(typeof config.multiplication_factor !== "undefined") throw Error(HashmapErrors.MULTIPLICATION_FACTOR_PROVIDED_MODULO);
+        } else {
+            if(typeof config.multiplication_factor !== "undefined") {
+                this.#multiplication_factor = 0.618;
+            }
         }
 
         if(config.enable_dynamic_rehashing) {
