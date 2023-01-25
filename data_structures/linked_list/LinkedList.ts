@@ -67,6 +67,7 @@ class LinkedList<T> {
             this.head = {...initial};
             this.length = 1;
         } else {
+            // @todo fix this
             this.head = new LLNode(initial);
             this.length = 1;
         }

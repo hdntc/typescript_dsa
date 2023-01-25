@@ -41,10 +41,6 @@ describe("basic usage", () => {
     it("supports access w/ number-key", () => {
         const my_hashmap = new Hashmap<string>(["jeremy", "davis", "paul"], [10,9,5]);
 
-        my_hashmap.buckets.forEach((x) => {
-            if(x) {console.log(x.traverse())}
-        });
-
         expect(my_hashmap.access(10)).toBe("jeremy");
         expect(my_hashmap.access(9)).toBe("davis");
         expect(my_hashmap.access(5)).toBe("paul");
@@ -62,12 +58,22 @@ describe("basic usage", () => {
 
         my_hashmap.insert("jackson", 11);
 
-        my_hashmap.buckets.forEach((b) => {
-            if(b) {
-                console.log(b.traverse())
-            }
-        });
-
         expect(my_hashmap.access(11)).toBe("jackson");
+    });
+
+    it("supports rehashing", () => {
+        const my_hashmap = new Hashmap<string>(["jeremy", "davis", "paul"], [10,9,5]);
+        my_hashmap.rehash(1);
+        expect(my_hashmap.load_factor).toBe(1);
+    });
+
+    it.only("supports dynamic rehashing", () => {
+        const my_hashmap = new Hashmap<number>([1,2,3], [4,5,6],undefined,undefined,true,0.6,0.75);
+        my_hashmap.insert(10, 3);
+        my_hashmap.insert(15, 19);
+        my_hashmap.insert(12, 30);
+        my_hashmap.insert(10, 35);
+
+        console.log(my_hashmap.valid_elements_range, my_hashmap.buckets)
     });
 });
