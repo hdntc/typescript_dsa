@@ -64,4 +64,10 @@ describe("basic usage", () => {
         my_ll.insert(10, (my_ll.head as LLNode<number>).next as LLNode<number>);
         expect(my_ll.length).toBe(3);
     });
+
+    it("actually correctly calculates length", () => {
+        const my_ll = new LinkedList<number>(new LLNode(5, new LLNode(10)));
+
+        expect(my_ll.length).toBe(2);
+    });
 });

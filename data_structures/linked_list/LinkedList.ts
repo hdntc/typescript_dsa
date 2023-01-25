@@ -62,15 +62,13 @@ class LinkedList<T> {
             }
 
             this.head = nodification[0];
-            this.length = initial.length;
         } else if(initial instanceof LLNode) {
             this.head = {...initial};
-            this.length = 1;
         } else {
-            // @todo fix this
             this.head = new LLNode(initial);
-            this.length = 1;
         }
+
+        this.length = this.traverse().length;
     };
 
     /**
