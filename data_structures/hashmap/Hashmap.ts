@@ -9,7 +9,8 @@ export enum HashmapErrors {
     DESIRED_LOAD_FACTOR_OUT_OF_BOUNDS="The provided value for the desired load factor is not within the min/max bounds.",
     LOAD_FACTOR_BOUNDS_PROVIDED_WITHOUT_DYNAMIC_REHASHING="Dynamic rehashing must be enabled to set min/max load factor bounds.",
     UNBOUNDED_DYNAMIC_REHASH="min_load_factor and max_load_factor must both be non-null to dynamically rehash.",
-    NO_BUCKETS="There are no buckets."
+    NO_BUCKETS="There are no buckets.",
+    MULTIPLICATION_FACTOR_PROVIDED_MODULO="hashing_method must be 'MULTIPLICATION' in order to use a multiplication factor."
 };
 
 /**
@@ -18,6 +19,75 @@ export enum HashmapErrors {
  * Both `number` and `string` implement `.toString()`
  */
 type Key = number | string;
+
+export function default_hash_function(key: Key): number {
+    var hash = 0;
+    var i = 0;
+
+    key = key.toString(); 
+
+    var len = key.length;
+
+    while(i < len) {
+        hash = ((hash << 5) - hash + key.charCodeAt(i++)) << 0; // hash <- 31 * hash + (current character code)
+    }
+
+    return hash;
+};
+
+/**
+ * The parameters with which to instantiate the hashmap.
+ * 
+ * Only `initial_values` and `initial_keys` are required.
+ */
+type HashmapConfig<T> =  {
+    /**
+     * An array of initial values for the hashmap. Must be the same length as `initial_keys`.
+     */
+    initial_values: T[],
+    /**
+     * An array of initial keys for the hashmap. Must be the same length as `initial_values`.
+     */
+    initial_keys: Key[],
+    /**
+     * The hash function to use. If not specified, uses {@link default_hash_function a default} equivalent to Java's `hashCode`.
+     */
+    hash_function?: (key: string) => number,
+    /**
+     * Initial number of buckets to use.
+     * - If not specified when not using dynamic rehashing, uses `ceil(1.5 * initial_keys.length)`.
+     * - If not specified when using dynamic rehashing, uses `ceil(2 * initial_keys.length / (min_load_factor + max_load_factor))`; this means the load factor will be close to the average of `min_load_factor` and `max_load_factor`.
+     */
+    buckets?: number,
+    /**
+     * Whether or not to enable dynamic rehashing. 
+     * When enabled, the hashmap will automatically scale in/out the number of buckets if the load factor falls outside the bounds provided by `min_load_factor`, `max_load_factor`. 
+     * `false` if not provided.
+     */
+    enable_dynamic_rehashing?: boolean,
+    /**
+     * Minimum acceptable load factor. 
+     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.60`.
+     */
+    min_load_factor?: number,
+    /**
+     * Maximum acceptable load factor. 
+     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.75`.
+     */
+    max_load_factor?: number,
+    /**
+     * The method of hashing to use.
+     * If not provided, defaults to `MODULO`.
+     * @see {@link https://en.wikipedia.org/wiki/Hash_table#Hashing_by_division Wikipedia}
+     */
+    hashing_method?: "MODULO" | "MULTIPLICATION"
+    /**
+     * The multiplication factor to use when using hashing by multiplication.
+     * - Must be between `0` and `1`.
+     * - When not provided when `hashing_method` is `MULTIPLICATION`, defaults to `0.618` (the reciprocal of the golden ratio). 
+     */
+    multiplication_factor?: number
+};
 
 /**
  * Hashmap class
@@ -82,6 +152,14 @@ export class Hashmap<T> {
      * This is done to prevent a rehash causing another rehash.
      */
     #stop_rehash_loop: boolean = true;
+    /**
+     * The hashing method to use.
+     */
+    #hashing_method: "MODULO" | "MULTIPLICATION";
+    /**
+     * Multiplication factor for hashing by multiplication (if used.)
+     */
+    #multiplication_factor: number | null = null;
 
     /**
      * Default hash function used when user does not specify their own
@@ -115,10 +193,23 @@ export class Hashmap<T> {
     private _get_bucket_index(key: Key): number {
         const n = this.buckets.length;
         if(n === 0) throw Error(HashmapErrors.NO_BUCKETS);
-        const hash = this.#hash_function(key.toString());
 
-        return ((hash % n) + n) % n;
+        const digest = this.#hash_function(key.toString());
+
+        return this.#hashing_method === "MODULO" ? 
+            this._hash_by_modulo(digest, n) : 
+            this._hash_by_multiplication(digest, n);
     };
+
+    private _hash_by_modulo(digest: number, buckets: number): number {
+        return ((digest % buckets) + buckets) % buckets;
+    }
+
+    private _hash_by_multiplication(digest: number, buckets: number): number {
+        const prod = digest * (this.#multiplication_factor as number);
+        const frac = prod - ~~prod;
+        return Math.floor(buckets * frac);
+    }
 
     /**
      * Rehashes the hash table if the {@link Hashmap.load_factor load factor} falls outside the min/max bounds.
@@ -165,7 +256,6 @@ export class Hashmap<T> {
             }
 
             wanted_num_buckets = Math.ceil(this.elements / desired);
-            console.log("DESIRED IS",desired);
         } else {
             wanted_num_buckets = desired;
         }
@@ -217,7 +307,6 @@ export class Hashmap<T> {
             // This might happen when the hm is small
             // Namely, when 2E/B <== m+M < 2E/(B-1) where E is # elements, B is current # buckets, m is min LF, M is max LF
             if(new_buckets === current_num_buckets) {
-                console.log("Equals condition")
                 if(this.elements - 1 < (<[number, number]>this.valid_elements_range)[1]) {
                     this.rehash(current_num_buckets - 1, true);
                 }
@@ -321,7 +410,6 @@ export class Hashmap<T> {
             // This might happen when the hm is small
             // Namely, when 2E/B <== m+M < 2E/(B-1) where E is # elements, B is current # buckets, m is min LF, M is max LF
             if(new_buckets === current_num_buckets) {
-                console.log("Equals condition")
                 if(this.elements + 1 > (<[number, number]>this.valid_elements_range)[1]) {
                     this.rehash(current_num_buckets + 1, true);
                 }
@@ -348,52 +436,40 @@ export class Hashmap<T> {
 
         this.elements++;
     }
-    
+
     /**
-     * @constructor
-     * @param initial_values An array of initial values for the hashmap. 
-     * Must be the same length as `initial_keys`.
-     * @param initial_keys An array of initial keys for the hashmap. 
-     * Must be the same length as `initial_values`.
-     * @param [hash_function] The hash function to use. 
-     * If not specified, uses an {@link Hashmap._default_hash_function internal default} equivalent to Java's `hashCode` function.
-     * @param [buckets] The number of initial buckets. 
-     * If not specified when not using dynamic rehashing, uses `ceil(1.5 * initial_keys.length)`.
-     * If not specified when using dynamic rehashing, uses `ceil(2 * initial_keys.length / (min_load_factor + max_load_factor))`; this means the load factor will be close to the average of `min_load_factor` and `max_load_factor`.
-     * @param [enable_dynamic_rehashing] Whether or not to enable dynamic rehashing. 
-     * When enabled, the hashmap will automatically scale in/out the number of buckets if the load factor falls outside the bounds provided by `min_load_factor`, `max_load_factor`. 
-     * `false` if not provided.
-     * @param [min_load_factor] Minimum acceptable load factor. 
-     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.60`.
-     * Otherwise, defaults to `null`.
-     * @param [max_load_factor] Maximum acceptable load factor. 
-     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.75`.
-     * Otherwise, defaults to `null`.
-     * 
+     * @param config See {@link HashmapConfig}.
      */
-    constructor(initial_values: T[],
-        initial_keys: Key[],
-        hash_function?: (key: string) => number,
-        buckets?: number,
-        enable_dynamic_rehashing: boolean = false,
-        min_load_factor?: number,
-        max_load_factor?: number) {
-        if(initial_values.length !== initial_keys.length) {
+    constructor(config: HashmapConfig<T>) {
+        if(config.initial_values.length !== config.initial_keys.length) {
             throw Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH);
         }
 
-        if(enable_dynamic_rehashing) {
-            if(typeof min_load_factor === "undefined") min_load_factor = 0.6;
-            if(typeof max_load_factor === "undefined") max_load_factor = 0.75;
+        const hashing_method: "MODULO" | "MULTIPLICATION" = config.hashing_method ? config.hashing_method : "MODULO";
+        this.#hashing_method = hashing_method;
 
-            if(!(0 <= min_load_factor && min_load_factor < max_load_factor)) {
+        if(hashing_method === "MODULO") {
+            if(typeof config.multiplication_factor !== "undefined") throw Error(HashmapErrors.MULTIPLICATION_FACTOR_PROVIDED_MODULO);
+        } else {
+            if(typeof config.multiplication_factor === "undefined") {
+                this.#multiplication_factor = 0.618;
+            } else {
+                this.#multiplication_factor = config.multiplication_factor;
+            }
+        }
+
+        if(config.enable_dynamic_rehashing) {
+            let min = typeof config.min_load_factor === "undefined" ? 0.6 : config.min_load_factor;
+            let max = typeof config.max_load_factor === "undefined" ? 0.75 : config.max_load_factor;
+
+            if(!(0 <= min && min < max)) {
                 throw Error(HashmapErrors.LOAD_FACTOR_BOUND_INVALID);
             }
 
-            this.#min_load_factor = min_load_factor;
-            this.#max_load_factor = max_load_factor;
+            this.#min_load_factor = min;
+            this.#max_load_factor = max;
         } else {
-            if(!(typeof min_load_factor === "undefined" && typeof max_load_factor === "undefined")) {
+            if(!(typeof config.min_load_factor === "undefined" && typeof config.max_load_factor === "undefined")) {
                 throw Error(HashmapErrors.LOAD_FACTOR_BOUNDS_PROVIDED_WITHOUT_DYNAMIC_REHASHING);
             }
 
@@ -401,20 +477,21 @@ export class Hashmap<T> {
             this.#max_load_factor = null;
         }
 
-        this.#dynamic_rehashing_enabled = enable_dynamic_rehashing;
+        this.#dynamic_rehashing_enabled = !!config.enable_dynamic_rehashing; // true if true, false if false, false if undefined
 
-        if(typeof hash_function === "undefined") {
+        if(typeof config.hash_function === "undefined") {
             this.#hash_function = this._default_hash_function;
         } else {
-            this.#hash_function = hash_function;
+            this.#hash_function = config.hash_function;
         }
 
+        let buckets: number | undefined = config.buckets;
         if(typeof buckets === "undefined") {
-            if(enable_dynamic_rehashing) {
+            if(config.enable_dynamic_rehashing) {
                 // This type assertion is safe because earlier we said that min, max_load_factor will have defaults 0.6, 0.75 if not already defined.
-                buckets = Math.ceil(2 * initial_keys.length / (<number>min_load_factor + <number>max_load_factor));
+                buckets = Math.ceil(2 * config.initial_keys.length / (<number>config.min_load_factor + <number>config.max_load_factor));
             } else {
-                buckets = Math.ceil(initial_keys.length * 1.5);
+                buckets = Math.ceil(config.initial_keys.length * 1.5);
             }
         } else {
             if(!Number.isInteger(buckets) || buckets < 1) {
@@ -425,8 +502,8 @@ export class Hashmap<T> {
         this.buckets = new Array(buckets);
         this.buckets.fill(null);
 
-        for(let i=0;i<initial_values.length;i++) {
-            this.insert(initial_values[i], initial_keys[i]);
+        for(let i=0;i<config.initial_values.length;i++) {
+            this.insert(config.initial_values[i], config.initial_keys[i]);
         }
 
         this.#stop_rehash_loop = false;
