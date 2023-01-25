@@ -10,6 +10,11 @@ export class TreeNode<T> {
         return this.#children;
     }
 
+    /**
+     * Setter for children of the node.
+     * - You can specify a list of TreeNodes or raw values or a mix of both.
+     * - Raw values will be converted to leaf nodes.
+     */
     set children(new_children: (TreeNode<T> | T)[]) {
         this.#children = new_children.map(child => {
             if(child instanceof TreeNode) return child;
