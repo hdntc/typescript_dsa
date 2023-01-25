@@ -36,7 +36,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Hashmap</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L31">hashmap/Hashmap.ts:31</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L101">hashmap/Hashmap.ts:101</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -50,8 +50,10 @@
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="hashmap_Hashmap.Hashmap.html#_dynamic_rehashing_enabled" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF984D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-1024-path"></rect><path d="M9.354 16V7.24H12.174C12.99 7.24 13.638 7.476 14.118 7.948C14.606 8.412 14.85 9.036 14.85 9.82C14.85 10.604 14.606 11.232 14.118 11.704C13.638 12.168 12.99 12.4 12.174 12.4H10.434V16H9.354ZM10.434 11.428H12.174C12.646 11.428 13.022 11.284 13.302 10.996C13.59 10.7 13.734 10.308 13.734 9.82C13.734 9.324 13.59 8.932 13.302 8.644C13.022 8.356 12.646 8.212 12.174 8.212H10.434V11.428Z" fill="var(--color-text)" id="icon-1024-text"></path></svg><span>#dynamic_<wbr/>rehashing_<wbr/>enabled</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#_hash_function" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#hash_<wbr/>function</span></a>
+<a href="hashmap_Hashmap.Hashmap.html#_hashing_method" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#hashing_<wbr/>method</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#_max_load_factor" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#max_<wbr/>load_<wbr/>factor</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#_min_load_factor" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#min_<wbr/>load_<wbr/>factor</span></a>
+<a href="hashmap_Hashmap.Hashmap.html#_multiplication_factor" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#multiplication_<wbr/>factor</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#_stop_rehash_loop" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#stop_<wbr/>rehash_<wbr/>loop</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#buckets" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>buckets</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#elements" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>elements</span></a>
@@ -69,6 +71,8 @@
 <div class="tsd-index-list"><a href="hashmap_Hashmap.Hashmap.html#_default_hash_function" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF4DB8" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-2048-path"></rect><path d="M9.162 16V7.24H10.578L11.514 10.072C11.602 10.328 11.674 10.584 11.73 10.84C11.794 11.088 11.842 11.28 11.874 11.416C11.906 11.28 11.954 11.088 12.018 10.84C12.082 10.584 12.154 10.324 12.234 10.06L13.122 7.24H14.538V16H13.482V12.82C13.482 12.468 13.49 12.068 13.506 11.62C13.53 11.172 13.558 10.716 13.59 10.252C13.622 9.78 13.654 9.332 13.686 8.908C13.726 8.476 13.762 8.1 13.794 7.78L12.366 12.16H11.334L9.894 7.78C9.934 8.092 9.97 8.456 10.002 8.872C10.042 9.28 10.078 9.716 10.11 10.18C10.142 10.636 10.166 11.092 10.182 11.548C10.206 12.004 10.218 12.428 10.218 12.82V16H9.162Z" fill="var(--color-text)" id="icon-2048-text"></path></svg><span>_default_<wbr/>hash_<wbr/>function</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#_dynamic_rehash_if_needed" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>_dynamic_<wbr/>rehash_<wbr/>if_<wbr/>needed</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#_get_bucket_index" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>_get_<wbr/>bucket_<wbr/>index</span></a>
+<a href="hashmap_Hashmap.Hashmap.html#_hash_by_modulo" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>_hash_<wbr/>by_<wbr/>modulo</span></a>
+<a href="hashmap_Hashmap.Hashmap.html#_hash_by_multiplication" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>_hash_<wbr/>by_<wbr/>multiplication</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#access" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>access</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#delete" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>delete</span></a>
 <a href="hashmap_Hashmap.Hashmap.html#insert" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>insert</span></a>
@@ -79,7 +83,7 @@
 <section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_Hashmap">new <wbr/>Hashmap<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>initial_values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span>, initial_keys<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">[]</span>, hash_function<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span>, buckets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, enable_dynamic_rehashing<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">boolean</span>, min_load_factor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, max_load_factor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="hashmap_Hashmap.Hashmap.html" class="tsd-signature-type" data-tsd-kind="Class">Hashmap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_Hashmap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_Hashmap">new <wbr/>Hashmap<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HashmapConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="hashmap_Hashmap.Hashmap.html" class="tsd-signature-type" data-tsd-kind="Class">Hashmap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_Hashmap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <section class="tsd-panel tsd-type-parameters">
 <h4>Type Parameters</h4>
@@ -90,58 +94,12 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>initial_values: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span></h5>
-<div class="tsd-comment tsd-typography"><p>An array of initial values for the hashmap. 
-Must be the same length as <code>initial_keys</code>.</p>
-</div></li>
-<li>
-<h5>initial_keys: <span class="tsd-signature-type">Key</span><span class="tsd-signature-symbol">[]</span></h5>
-<div class="tsd-comment tsd-typography"><p>An array of initial keys for the hashmap. 
-Must be the same length as <code>initial_values</code>.</p>
-</div></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> hash_function: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span></h5>
-<div class="tsd-comment tsd-typography"><p>The hash function to use. 
-If not specified, uses an <a href="hashmap_Hashmap.Hashmap.html#_default_hash_function">internal default</a> equivalent to Java&#39;s <code>hashCode</code> function.</p>
-</div>
-<ul class="tsd-parameters">
-<li class="tsd-parameter-signature">
-<ul class="tsd-signatures tsd-kind-type-literal">
-<li class="tsd-signature"><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></li></ul></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> buckets: <span class="tsd-signature-type">number</span></h5>
-<div class="tsd-comment tsd-typography"><p>The number of initial buckets. 
-If not specified when not using dynamic rehashing, uses <code>ceil(1.5 * initial_keys.length)</code>.
-If not specified when using dynamic rehashing, uses <code>ceil(2 * initial_keys.length / (min_load_factor + max_load_factor))</code>; this means the load factor will be close to the average of <code>min_load_factor</code> and <code>max_load_factor</code>.</p>
-</div></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> enable_dynamic_rehashing: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
-<div class="tsd-comment tsd-typography"><p>Whether or not to enable dynamic rehashing. 
-When enabled, the hashmap will automatically scale in/out the number of buckets if the load factor falls outside the bounds provided by <code>min_load_factor</code>, <code>max_load_factor</code>. 
-<code>false</code> if not provided.</p>
-</div></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> min_load_factor: <span class="tsd-signature-type">number</span></h5>
-<div class="tsd-comment tsd-typography"><p>Minimum acceptable load factor. 
-If not provided when <code>enable_dynamic_rehashing</code> is <code>true</code>, defaults to <code>0.60</code>.
-Otherwise, defaults to <code>null</code>.</p>
-</div></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> max_load_factor: <span class="tsd-signature-type">number</span></h5>
-<div class="tsd-comment tsd-typography"><p>Maximum acceptable load factor. 
-If not provided when <code>enable_dynamic_rehashing</code> is <code>true</code>, defaults to <code>0.75</code>.
-Otherwise, defaults to <code>null</code>.</p>
+<h5>config: <span class="tsd-signature-type">HashmapConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>See HashmapConfig.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="hashmap_Hashmap.Hashmap.html" class="tsd-signature-type" data-tsd-kind="Class">Hashmap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L374">hashmap/Hashmap.ts:374</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L443">hashmap/Hashmap.ts:443</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_dynamic_rehashing_enabled" class="tsd-anchor"></a>
@@ -150,7 +108,7 @@ Otherwise, defaults to <code>null</code>.</p>
 <div class="tsd-comment tsd-typography"><p>Whether or not to use dynamic rehashing.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L79">hashmap/Hashmap.ts:79</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L149">hashmap/Hashmap.ts:149</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_hash_function" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#hash_<wbr/>function</span><a href="#_hash_function" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">#hash_<wbr/>function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span></div>
@@ -172,7 +130,14 @@ Otherwise, defaults to <code>null</code>.</p>
 <h5>key: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L63">hashmap/Hashmap.ts:63</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L133">hashmap/Hashmap.ts:133</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_hashing_method" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#hashing_<wbr/>method</span><a href="#_hashing_method" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">#hashing_<wbr/>method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;MODULO&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;MULTIPLICATION&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>The hashing method to use.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L158">hashmap/Hashmap.ts:158</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_max_load_factor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#max_<wbr/>load_<wbr/>factor</span><a href="#_max_load_factor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">#max_<wbr/>load_<wbr/>factor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
@@ -180,7 +145,7 @@ Otherwise, defaults to <code>null</code>.</p>
 <p>This value is compared with the new <a href="hashmap_Hashmap.Hashmap.html#load_factor">load factor</a> after insert/delete operations to determine whether or not to decrease the # of buckets.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L75">hashmap/Hashmap.ts:75</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L145">hashmap/Hashmap.ts:145</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_min_load_factor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#min_<wbr/>load_<wbr/>factor</span><a href="#_min_load_factor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">#min_<wbr/>load_<wbr/>factor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
@@ -188,7 +153,14 @@ Otherwise, defaults to <code>null</code>.</p>
 <p>This value is compared with the new <a href="hashmap_Hashmap.Hashmap.html#load_factor">load factor</a> after insert/delete operations to determine whether or not to increase the # of buckets.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L69">hashmap/Hashmap.ts:69</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L139">hashmap/Hashmap.ts:139</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_multiplication_factor" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#multiplication_<wbr/>factor</span><a href="#_multiplication_factor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">#multiplication_<wbr/>factor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = null</span></div>
+<div class="tsd-comment tsd-typography"><p>Multiplication factor for hashing by multiplication (if used.)</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L162">hashmap/Hashmap.ts:162</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_stop_rehash_loop" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#stop_<wbr/>rehash_<wbr/>loop</span><a href="#_stop_rehash_loop" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">#stop_<wbr/>rehash_<wbr/>loop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
@@ -196,7 +168,7 @@ Otherwise, defaults to <code>null</code>.</p>
 This is done to prevent a rehash causing another rehash.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L84">hashmap/Hashmap.ts:84</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L154">hashmap/Hashmap.ts:154</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="buckets" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>buckets</span><a href="#buckets" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">buckets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="linked_list_LinkedList.LinkedList.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedList</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
@@ -206,7 +178,7 @@ This is done to prevent a rehash causing another rehash.</p>
 <p>When all entries in an LL bucket are removed, the corresponding entry in the array becomes <code>null</code>; see <a href="hashmap_Hashmap.Hashmap.html#delete">delete</a></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L41">hashmap/Hashmap.ts:41</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L111">hashmap/Hashmap.ts:111</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="elements" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>elements</span><a href="#elements" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">elements<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
@@ -214,21 +186,21 @@ This is done to prevent a rehash causing another rehash.</p>
 <p>Used to calculate <a href="hashmap_Hashmap.Hashmap.html#load_factor">load factor</a></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L51">hashmap/Hashmap.ts:51</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L121">hashmap/Hashmap.ts:121</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="keys" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>keys</span><a href="#keys" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">keys<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 <div class="tsd-comment tsd-typography"><p>The keys used in the hashmap</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L45">hashmap/Hashmap.ts:45</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L115">hashmap/Hashmap.ts:115</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rehashes" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rehashes</span><a href="#rehashes" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">rehashes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 <div class="tsd-comment tsd-typography"><p>Number of times the hashmap was dynamically rehashed (i.e. the number of buckets changed.)</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L55">hashmap/Hashmap.ts:55</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L125">hashmap/Hashmap.ts:125</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="length" class="tsd-anchor"></a>
@@ -238,7 +210,7 @@ This is done to prevent a rehash causing another rehash.</p>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L196">hashmap/Hashmap.ts:196</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L286">hashmap/Hashmap.ts:286</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="load_factor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>load_<wbr/>factor</span><a href="#load_factor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
@@ -251,7 +223,7 @@ This is done to prevent a rehash causing another rehash.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L192">hashmap/Hashmap.ts:192</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L282">hashmap/Hashmap.ts:282</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="valid_elements_range" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>valid_<wbr/>elements_<wbr/>range</span><a href="#valid_elements_range" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
@@ -265,7 +237,7 @@ If an insertion or deletion operation would cause the number of elements to fall
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L294">hashmap/Hashmap.ts:294</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L383">hashmap/Hashmap.ts:383</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_default_hash_function" class="tsd-anchor"></a>
@@ -285,7 +257,7 @@ If an insertion or deletion operation would cause the number of elements to fall
 <h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L94">hashmap/Hashmap.ts:94</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L172">hashmap/Hashmap.ts:172</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_dynamic_rehash_if_needed" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_dynamic_<wbr/>rehash_<wbr/>if_<wbr/>needed</span><a href="#_dynamic_rehash_if_needed" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -299,7 +271,7 @@ If an insertion or deletion operation would cause the number of elements to fall
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L128">hashmap/Hashmap.ts:128</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L219">hashmap/Hashmap.ts:219</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_get_bucket_index" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_get_<wbr/>bucket_<wbr/>index</span><a href="#_get_bucket_index" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -318,7 +290,37 @@ If an insertion or deletion operation would cause the number of elements to fall
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L115">hashmap/Hashmap.ts:115</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L193">hashmap/Hashmap.ts:193</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_hash_by_modulo" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_hash_<wbr/>by_<wbr/>modulo</span><a href="#_hash_by_modulo" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="_hash_by_modulo._hash_by_modulo-1">_hash_<wbr/>by_<wbr/>modulo<span class="tsd-signature-symbol">(</span>digest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, buckets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#_hash_by_modulo._hash_by_modulo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>digest: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5>buckets: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L204">hashmap/Hashmap.ts:204</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_hash_by_multiplication" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_hash_<wbr/>by_<wbr/>multiplication</span><a href="#_hash_by_multiplication" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="_hash_by_multiplication._hash_by_multiplication-1">_hash_<wbr/>by_<wbr/>multiplication<span class="tsd-signature-symbol">(</span>digest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, buckets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#_hash_by_multiplication._hash_by_multiplication-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>digest: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5>buckets: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L208">hashmap/Hashmap.ts:208</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="access" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>access</span><a href="#access" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -337,7 +339,7 @@ If an insertion or deletion operation would cause the number of elements to fall
 <h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L269">hashmap/Hashmap.ts:269</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L358">hashmap/Hashmap.ts:358</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="delete" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete</span><a href="#delete" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -355,7 +357,7 @@ If an insertion or deletion operation would cause the number of elements to fall
 <h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L208">hashmap/Hashmap.ts:208</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L298">hashmap/Hashmap.ts:298</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="insert" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>insert</span><a href="#insert" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -374,7 +376,7 @@ If an insertion or deletion operation would cause the number of elements to fall
 <h5>key: <span class="tsd-signature-type">Key</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L312">hashmap/Hashmap.ts:312</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L401">hashmap/Hashmap.ts:401</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="rehash" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rehash</span><a href="#rehash" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -399,7 +401,7 @@ If <code>false</code>, <code>desired</code> will be interpreted as the new desir
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/ca9eb0b/data_structures/hashmap/Hashmap.ts#L157">hashmap/Hashmap.ts:157</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/hdntc/typescript_dsa/blob/a9bc395/data_structures/hashmap/Hashmap.ts#L248">hashmap/Hashmap.ts:248</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -433,8 +435,10 @@ If <code>false</code>, <code>desired</code> will be interpreted as the new desir
 <li class="tsd-kind-constructor tsd-parent-kind-class"><a href="hashmap_Hashmap.Hashmap.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-512-path"></use><use href="#icon-512-text"></use></svg>constructor</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_dynamic_rehashing_enabled" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#dynamic_<wbr/>rehashing_<wbr/>enabled</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_hash_function" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#hash_<wbr/>function</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_hashing_method" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#hashing_<wbr/>method</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_max_load_factor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#max_<wbr/>load_<wbr/>factor</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_min_load_factor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#min_<wbr/>load_<wbr/>factor</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_multiplication_factor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#multiplication_<wbr/>factor</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_stop_rehash_loop" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#stop_<wbr/>rehash_<wbr/>loop</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="hashmap_Hashmap.Hashmap.html#buckets" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>buckets</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="hashmap_Hashmap.Hashmap.html#elements" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>elements</a></li>
@@ -446,6 +450,8 @@ If <code>false</code>, <code>desired</code> will be interpreted as the new desir
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_default_hash_function" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_default_<wbr/>hash_<wbr/>function</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_dynamic_rehash_if_needed" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_dynamic_<wbr/>rehash_<wbr/>if_<wbr/>needed</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_get_bucket_index" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_get_<wbr/>bucket_<wbr/>index</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_hash_by_modulo" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_hash_<wbr/>by_<wbr/>modulo</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="hashmap_Hashmap.Hashmap.html#_hash_by_multiplication" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_hash_<wbr/>by_<wbr/>multiplication</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="hashmap_Hashmap.Hashmap.html#access" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>access</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="hashmap_Hashmap.Hashmap.html#delete" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>delete</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="hashmap_Hashmap.Hashmap.html#insert" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>insert</a></li>
