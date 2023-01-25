@@ -34,13 +34,45 @@ export function default_hash_function(key: Key): number {
     return hash;
 };
 
+/**
+ * The parameters with which to instantiate the hashmap.
+ * 
+ * Only `initial_values` and `initial_keys` are required.
+ */
 type HashmapConfig<T> =  {
+    /**
+     * An array of initial values for the hashmap. Must be the same length as `initial_keys`.
+     */
     initial_values: T[],
+    /**
+     * An array of initial keys for the hashmap. Must be the same length as `initial_values`.
+     */
     initial_keys: Key[],
+    /**
+     * The hash function to use. If not specified, uses {@link default_hash_function a default} equivalent to Java's `hashCode`.
+     */
     hash_function?: (key: string) => number,
+    /**
+     * Initial number of buckets to use.
+     * - If not specified when not using dynamic rehashing, uses `ceil(1.5 * initial_keys.length)`.
+     * - If not specified when using dynamic rehashing, uses `ceil(2 * initial_keys.length / (min_load_factor + max_load_factor))`; this means the load factor will be close to the average of `min_load_factor` and `max_load_factor`.
+     */
     buckets?: number,
+    /**
+     * Whether or not to enable dynamic rehashing. 
+     * When enabled, the hashmap will automatically scale in/out the number of buckets if the load factor falls outside the bounds provided by `min_load_factor`, `max_load_factor`. 
+     * `false` if not provided.
+     */
     enable_dynamic_rehashing?: boolean,
+    /**
+     * Minimum acceptable load factor. 
+     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.60`.
+     */
     min_load_factor?: number,
+    /**
+     * Maximum acceptable load factor. 
+     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.75`.
+     */
     max_load_factor?: number,
 };
 
@@ -373,28 +405,9 @@ export class Hashmap<T> {
 
         this.elements++;
     }
-    
+
     /**
-     * @constructor
-     * @param initial_values An array of initial values for the hashmap. 
-     * Must be the same length as `initial_keys`.
-     * @param initial_keys An array of initial keys for the hashmap. 
-     * Must be the same length as `initial_values`.
-     * @param [hash_function] The hash function to use. 
-     * If not specified, uses an {@link Hashmap._default_hash_function internal default} equivalent to Java's `hashCode` function.
-     * @param [buckets] The number of initial buckets. 
-     * If not specified when not using dynamic rehashing, uses `ceil(1.5 * initial_keys.length)`.
-     * If not specified when using dynamic rehashing, uses `ceil(2 * initial_keys.length / (min_load_factor + max_load_factor))`; this means the load factor will be close to the average of `min_load_factor` and `max_load_factor`.
-     * @param [enable_dynamic_rehashing] Whether or not to enable dynamic rehashing. 
-     * When enabled, the hashmap will automatically scale in/out the number of buckets if the load factor falls outside the bounds provided by `min_load_factor`, `max_load_factor`. 
-     * `false` if not provided.
-     * @param [min_load_factor] Minimum acceptable load factor. 
-     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.60`.
-     * Otherwise, defaults to `null`.
-     * @param [max_load_factor] Maximum acceptable load factor. 
-     * If not provided when `enable_dynamic_rehashing` is `true`, defaults to `0.75`.
-     * Otherwise, defaults to `null`.
-     * 
+     * @param config See {@link HashmapConfig}.
      */
     constructor(config: HashmapConfig<T>) {
         if(config.initial_values.length !== config.initial_keys.length) {
