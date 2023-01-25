@@ -19,6 +19,31 @@ export enum HashmapErrors {
  */
 type Key = number | string;
 
+export function default_hash_function(key: Key): number {
+    var hash = 0;
+    var i = 0;
+
+    key = key.toString(); 
+
+    var len = key.length;
+
+    while(i < len) {
+        hash = ((hash << 5) - hash + key.charCodeAt(i++)) << 0; // hash <- 31 * hash + (current character code)
+    }
+
+    return hash;
+};
+
+type HashmapConfig<T> =  {
+    initial_values: T[],
+    initial_keys: Key[],
+    hash_function?: (key: string) => number,
+    buckets?: number,
+    enable_dynamic_rehashing?: boolean,
+    min_load_factor?: number,
+    max_load_factor?: number,
+};
+
 /**
  * Hashmap class
  * 
@@ -371,29 +396,23 @@ export class Hashmap<T> {
      * Otherwise, defaults to `null`.
      * 
      */
-    constructor(initial_values: T[],
-        initial_keys: Key[],
-        hash_function?: (key: string) => number,
-        buckets?: number,
-        enable_dynamic_rehashing: boolean = false,
-        min_load_factor?: number,
-        max_load_factor?: number) {
-        if(initial_values.length !== initial_keys.length) {
+    constructor(config: HashmapConfig<T>) {
+        if(config.initial_values.length !== config.initial_keys.length) {
             throw Error(HashmapErrors.INIT_ARRAY_LENGTH_MISMATCH);
         }
 
-        if(enable_dynamic_rehashing) {
-            if(typeof min_load_factor === "undefined") min_load_factor = 0.6;
-            if(typeof max_load_factor === "undefined") max_load_factor = 0.75;
+        if(config.enable_dynamic_rehashing) {
+            let min = typeof config.min_load_factor === "undefined" ? 0.6 : config.min_load_factor;
+            let max = typeof config.max_load_factor === "undefined" ? 0.75 : config.max_load_factor;
 
-            if(!(0 <= min_load_factor && min_load_factor < max_load_factor)) {
+            if(!(0 <= min && min < max)) {
                 throw Error(HashmapErrors.LOAD_FACTOR_BOUND_INVALID);
             }
 
-            this.#min_load_factor = min_load_factor;
-            this.#max_load_factor = max_load_factor;
+            this.#min_load_factor = min;
+            this.#max_load_factor = max;
         } else {
-            if(!(typeof min_load_factor === "undefined" && typeof max_load_factor === "undefined")) {
+            if(!(typeof config.min_load_factor === "undefined" && typeof config.max_load_factor === "undefined")) {
                 throw Error(HashmapErrors.LOAD_FACTOR_BOUNDS_PROVIDED_WITHOUT_DYNAMIC_REHASHING);
             }
 
@@ -401,20 +420,21 @@ export class Hashmap<T> {
             this.#max_load_factor = null;
         }
 
-        this.#dynamic_rehashing_enabled = enable_dynamic_rehashing;
+        this.#dynamic_rehashing_enabled = !!config.enable_dynamic_rehashing; // true if true, false if false, false if undefined
 
-        if(typeof hash_function === "undefined") {
+        if(typeof config.hash_function === "undefined") {
             this.#hash_function = this._default_hash_function;
         } else {
-            this.#hash_function = hash_function;
+            this.#hash_function = config.hash_function;
         }
 
+        let buckets: number | undefined = config.buckets;
         if(typeof buckets === "undefined") {
-            if(enable_dynamic_rehashing) {
+            if(config.enable_dynamic_rehashing) {
                 // This type assertion is safe because earlier we said that min, max_load_factor will have defaults 0.6, 0.75 if not already defined.
-                buckets = Math.ceil(2 * initial_keys.length / (<number>min_load_factor + <number>max_load_factor));
+                buckets = Math.ceil(2 * config.initial_keys.length / (<number>config.min_load_factor + <number>config.max_load_factor));
             } else {
-                buckets = Math.ceil(initial_keys.length * 1.5);
+                buckets = Math.ceil(config.initial_keys.length * 1.5);
             }
         } else {
             if(!Number.isInteger(buckets) || buckets < 1) {
@@ -425,8 +445,8 @@ export class Hashmap<T> {
         this.buckets = new Array(buckets);
         this.buckets.fill(null);
 
-        for(let i=0;i<initial_values.length;i++) {
-            this.insert(initial_values[i], initial_keys[i]);
+        for(let i=0;i<config.initial_values.length;i++) {
+            this.insert(config.initial_values[i], config.initial_keys[i]);
         }
 
         this.#stop_rehash_loop = false;
