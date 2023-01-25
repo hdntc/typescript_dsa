@@ -67,13 +67,11 @@ describe("basic usage", () => {
         expect(my_hashmap.load_factor).toBe(1);
     });
 
-    it.only("supports dynamic rehashing", () => {
+    it("supports dynamic rehashing", () => {
         const my_hashmap = new Hashmap<number>([1,2,3], [4,5,6],undefined,undefined,true,0.6,0.75);
         my_hashmap.insert(10, 3);
         my_hashmap.insert(15, 19);
         my_hashmap.insert(12, 30);
         my_hashmap.insert(10, 35);
-
-        console.log(my_hashmap.valid_elements_range, my_hashmap.buckets)
     });
 });
