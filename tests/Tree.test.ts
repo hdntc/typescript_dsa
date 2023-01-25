@@ -1,18 +1,10 @@
-import { Tree, TreeNode } from "../data_structures/tree/Tree";
+import { TreeNode } from "../data_structures/tree/Tree";
 
 describe("basic usage", () => {
-    it("supports initialzation", () => {
-        const my_tree = new Tree<number>(5);
-
-        expect(my_tree.root.value).toBe(5);
-        expect(my_tree.root.children.length).toBe(0);
-    });
-
     it("supports children", () => {
         const my_node = new TreeNode<number>(5, [1, 3, 5, new TreeNode(2), new TreeNode(5)]);
-        const my_tree = new Tree<number>(my_node);
 
-        expect(my_tree.root.children.map(child => child.value)).toEqual([1,3,5,2,5]);
+        expect(my_node.children.map(child => child.value)).toEqual([1,3,5,2,5]);
     });
 
     it("supports dfs (nodes found)", () => {
@@ -54,5 +46,14 @@ describe("basic usage", () => {
         const bfs_result = my_node.breadth_first_search("e");
 
         expect(bfs_result).toEqual([]);
+    });
+
+    it("supports depth-first filter", () => {
+        const my_node = new TreeNode<string>("a", [new TreeNode<string>("a", ["bb", "d"]), "ad", "cde"]);
+
+        const dfs_result = my_node.depth_first_filter(node => node.value.length===3);
+
+        expect(dfs_result.length).toBe(1);
+        expect(dfs_result[0]).toBe(my_node.children[2]);
     });
 });
