@@ -128,4 +128,24 @@ describe("basic usage", () => {
 
         expect(() => my_hashmap.delete(5)).not.toThrow(Error);
     });
+
+    it("supports dynamic rehashing w/ hash by multplication", () => {
+        const my_hashmap = new Hashmap<number>({
+            initial_values: [1,2,3,4,5,6,7,8,9,10],
+            initial_keys: [4,5,6,10,2,11,12,13,14,15], 
+            hashing_method: "MULTIPLICATION",
+            enable_dynamic_rehashing: true,
+            min_load_factor: 0.4,
+            max_load_factor: 0.8
+        });
+
+        const before = my_hashmap.load_factor;
+
+        for(let i=100;i<200;i++) my_hashmap.insert(i, i);
+
+        const after = my_hashmap.load_factor;
+        console.log(before,after)
+
+        expect(after).not.toBe(before);
+    });
 });
