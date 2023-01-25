@@ -8,7 +8,8 @@ export enum HashmapErrors {
     LOAD_FACTOR_BOUND_INVALID="The load factor bound must satisfy 0 <= min < max.",
     DESIRED_LOAD_FACTOR_OUT_OF_BOUNDS="The provided value for the desired load factor is not within the min/max bounds.",
     LOAD_FACTOR_BOUNDS_PROVIDED_WITHOUT_DYNAMIC_REHASHING="Dynamic rehashing must be enabled to set min/max load factor bounds.",
-    UNBOUNDED_DYNAMIC_REHASH="min_load_factor and max_load_factor must both be non-null to dynamically rehash."
+    UNBOUNDED_DYNAMIC_REHASH="min_load_factor and max_load_factor must both be non-null to dynamically rehash.",
+    NO_BUCKETS="There are no buckets."
 };
 
 /**
@@ -76,6 +77,11 @@ export class Hashmap<T> {
      * Whether or not to use dynamic rehashing.
      */
     #dynamic_rehashing_enabled: boolean = false;
+    /**
+     * When this is `true`, `insert` and `delete` operations will not check for dynamic rehashing.
+     * This is done to prevent a rehash causing another rehash.
+     */
+    #stop_rehash_loop: boolean = true;
 
     /**
      * Default hash function used when user does not specify their own
@@ -107,8 +113,9 @@ export class Hashmap<T> {
      * @returns The index of the corresponding bucket in {@link Hashmap.buckets this.buckets}
      */
     private _get_bucket_index(key: Key): number {
-        const hash = this.#hash_function(key.toString());
         const n = this.buckets.length;
+        if(n === 0) throw Error(HashmapErrors.NO_BUCKETS);
+        const hash = this.#hash_function(key.toString());
 
         return ((hash % n) + n) % n;
     };
@@ -138,25 +145,32 @@ export class Hashmap<T> {
     }
 
     /**
-     * @todo Allow for revert if there is too large of a difference between desired and actual
+     * Resizes the number of buckets of the hashmap and rehashes pre-existing elements to the new buckets.
+     * @param desired The desired new value for the parameter.
+     * @param on_buckets Whether to rehash based on load factor or number of buckets.
+     * If `true`, `desired` will be interpreted as the new number of buckets.
+     * If `false`, `desired` will be interpreted as the new desired load factor.
+     * `false` by default.
+     * 
+     * When `on_buckets` is `false`, the new number of buckets is set to `ceil(entries / desired)`.
      */
-    rehash(desired_load_factor: number): void {
-        // Only do bounds check if bounds are actually set
-        if(!(this.#min_load_factor === null || this.#max_load_factor === null)) {
-            if(!(this.#min_load_factor <= desired_load_factor && desired_load_factor <= this.#max_load_factor)) {
-                throw Error(HashmapErrors.DESIRED_LOAD_FACTOR_OUT_OF_BOUNDS);
+    rehash(desired: number, on_buckets: boolean = false): void {
+        let wanted_num_buckets: number;
+
+        if(!on_buckets) {
+            if(!(this.#min_load_factor === null || this.#max_load_factor === null)) {
+                if(!(this.#min_load_factor <= desired && desired <= this.#max_load_factor)) {
+                    throw Error(HashmapErrors.DESIRED_LOAD_FACTOR_OUT_OF_BOUNDS);
+                }
             }
+
+            wanted_num_buckets = Math.ceil(this.elements / desired);
+            console.log("DESIRED IS",desired);
+        } else {
+            wanted_num_buckets = desired;
         }
 
         const all_entries: [string, T][] = this.buckets.map((x) => { return x ? x.traverse() : [] }).flat();
-        const former_num_buckets: number = this.buckets.length;
-        const entries: number = this.elements;
-
-        // desired load factor = # entries / # buckets
-        // # new buckets  = ceil(# entires / desired load factor)
-        // new load factor = # entries / ceil(# entries / load factor)
-
-        const wanted_num_buckets: number = Math.ceil(entries / desired_load_factor);
 
         this.buckets = new Array(wanted_num_buckets);
         this.buckets.fill(null);
@@ -193,6 +207,27 @@ export class Hashmap<T> {
      */
     delete(key: Key): void {
         key = key.toString();
+
+        if(this.#dynamic_rehashing_enabled && !this.#stop_rehash_loop) {
+            this.#stop_rehash_loop = true;
+            // Check what the outcome bucket size would be if doing lf-based rehash
+            const current_num_buckets = this.buckets.length;
+            const new_buckets = Math.ceil(2 * this.elements/ (<number>this.#max_load_factor + <number>this.#min_load_factor));
+
+            // This might happen when the hm is small
+            // Namely, when 2E/B <== m+M < 2E/(B-1) where E is # elements, B is current # buckets, m is min LF, M is max LF
+            if(new_buckets === current_num_buckets) {
+                console.log("Equals condition")
+                if(this.elements - 1 < (<[number, number]>this.valid_elements_range)[1]) {
+                    this.rehash(current_num_buckets - 1, true);
+                }
+            } else {
+                this.rehash((<number>this.#max_load_factor + <number>this.#min_load_factor) / 2, false)
+            }
+
+            this.#stop_rehash_loop = false;
+        }
+
         const bucket_index = this._get_bucket_index(key);
         const resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
@@ -252,7 +287,7 @@ export class Hashmap<T> {
     }
 
     /**
-     * @returns a tuple `[min, max]` of two integers, representing the (inclusive) range of allowed number of elements/entries before dynamic rehashing.
+     * @returns a tuple `[min, max]` of two integers, representing the inclusive range of allowed number of elements/entries before dynamic rehashing.
      * If an insertion or deletion operation would cause the number of elements to fall outside of this range, the number of buckets will be adjusted before the insertion/deletion.
      * @returns `null` if dynamic rehashing is not enabled.
      */
@@ -276,28 +311,40 @@ export class Hashmap<T> {
      */
     insert(value: T, key: Key) {
         key = key.toString();
+
+        if(this.#dynamic_rehashing_enabled && !this.#stop_rehash_loop) {
+            this.#stop_rehash_loop = true;
+            // Check what the outcome bucket size would be if doing lf-based rehash
+            const current_num_buckets = this.buckets.length;
+            const new_buckets = Math.ceil(2 * this.elements / (<number>this.#max_load_factor + <number>this.#min_load_factor));
+
+            // This might happen when the hm is small
+            // Namely, when 2E/B <== m+M < 2E/(B-1) where E is # elements, B is current # buckets, m is min LF, M is max LF
+            if(new_buckets === current_num_buckets) {
+                console.log("Equals condition")
+                if(this.elements + 1 > (<[number, number]>this.valid_elements_range)[1]) {
+                    this.rehash(current_num_buckets + 1, true);
+                }
+            } else {
+                this.rehash((<number>this.#max_load_factor + <number>this.#min_load_factor) / 2, false)
+            }
+
+            this.#stop_rehash_loop = false;
+        }
+
         const bucket_index = this._get_bucket_index(key);
         let resulstant_bucket: LinkedList<[string, T]> | null = this.buckets[bucket_index];
 
-        if(this.#min_load_factor !== null && this.#max_load_factor !== null) {
-            // calculate what the load factor would be after insert w/ same # buckets
-            const would_be_load_factor = this.load_factor + 1 / this.buckets.length; // (this.elements + 1) / this.buckets.length
-            // could also save from performing reciprocal operation by comparing would_be * this.buckets.length to min*buckets.length etc
-            if(!(this.#min_load_factor < would_be_load_factor && would_be_load_factor < this.#max_load_factor)) {
-                // if the would-be load factor is out of bounds, instead do a rehash and THEN insert (this saves 1 insertion overall
-                // when compared to the alternative of rehashing if needed after performing insert)
-            }
+        if(resulstant_bucket === null) {
+            this.buckets[bucket_index] = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
         } else {
-            if(resulstant_bucket === null) {
-                this.buckets[bucket_index] = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
-            } else {
-                const new_list = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
-                (<LLNode<[string, T]>>resulstant_bucket.head).prev = new_list.head; // safe b.c. would only be null if resultant_bucket were null
-                (<LLNode<[string, T]>>new_list.head).next = resulstant_bucket.head; // safe b.c. new_list is initialized with an LLNode
-                
-                this.buckets[bucket_index] = new_list;
-            }
+            const new_list = new LinkedList<[string, T]>(new LLNode<[string,T]>([key, value]));
+            (<LLNode<[string, T]>>resulstant_bucket.head).prev = new_list.head; // safe b.c. would only be null if resultant_bucket were null
+            (<LLNode<[string, T]>>new_list.head).next = resulstant_bucket.head; // safe b.c. new_list is initialized with an LLNode
+            
+            this.buckets[bucket_index] = new_list;
         }
+        
 
         this.elements++;
     }
@@ -381,5 +428,7 @@ export class Hashmap<T> {
         for(let i=0;i<initial_values.length;i++) {
             this.insert(initial_values[i], initial_keys[i]);
         }
+
+        this.#stop_rehash_loop = false;
     };
 };
