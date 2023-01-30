@@ -13,11 +13,27 @@ describe("basic usage", () => {
         const generator = new NormalGenerator({std: 3, mean: 10, methodID: NormalGeneratorMethod.BOX_MULLER });
 
         const values: number[] = generator.generate(1000);
+        const average = avg(values);
+        const standard_dev = std(values);
 
-        expect(avg(values)).toBeGreaterThan(9.5);
-        expect(avg(values)).toBeLessThan(10.5);
-        expect(std(values)).toBeGreaterThan(2.5);
-        expect(std(values)).toBeLessThan(3.5);
+        expect(average).toBeGreaterThan(9.5);
+        expect(average).toBeLessThan(10.5);
+        expect(standard_dev).toBeGreaterThan(2.5);
+        expect(standard_dev).toBeLessThan(3.5);
+    });
+
+    it("generates values that are somewhat reasonable wrt config (irwin-hall)", () => {
+        const generator = new NormalGenerator({std: 3, mean: 10, methodID: NormalGeneratorMethod.IRWIN_HALL });
+
+        const values: number[] = generator.generate(10000);
+
+        const average = avg(values);
+        const standard_dev = std(values);
+
+        expect(average).toBeGreaterThan(9.5);
+        expect(average).toBeLessThan(10.5);
+        expect(standard_dev).toBeGreaterThan(2.5);
+        expect(standard_dev).toBeLessThan(3.5);
     });
 
     it("throws error w/ invalid std config", () => {
