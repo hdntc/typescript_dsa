@@ -1,5 +1,9 @@
 import { Generator, GeneratorConfig } from "./Generator";
 
+export enum ExponentialGeneratorErrors {
+    INVALID_RATE="The rate must be positive."
+};
+
 export type ExponentialGeneratorConfig = {
     rate: number
 } & GeneratorConfig;
@@ -12,6 +16,8 @@ export class ExponentialGenerator extends Generator {
     }
 
     constructor({ rate, shouldLogValues }: ExponentialGeneratorConfig) {
+        if(rate <= 0) throw Error(ExponentialGeneratorErrors.INVALID_RATE);
+
         super({ shouldLogValues });
         this.#rate = rate;
     }
