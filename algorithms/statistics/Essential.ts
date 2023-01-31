@@ -4,6 +4,7 @@
  * @returns The average or mean.
  */
 const avg = (nums: number[]) => {
+    if(!nums.length) return 0;
     return nums.reduce((acc, curr) => acc + curr) / nums.length;
 }
 
@@ -17,6 +18,7 @@ const avg = (nums: number[]) => {
  * @returns The standard deviation.
  */
 const std = (nums: number[], sample: boolean=false) => {
+    if(!nums.length) return 0;
     return Math.sqrt(vnc(nums, sample));
 }
 
@@ -30,6 +32,7 @@ const std = (nums: number[], sample: boolean=false) => {
  * @returns The variance.
  */
 const vnc = (nums: number[], sample: boolean=false) => {
+    if(!nums.length) return 0;
     return nums.map(x => Math.pow(x - avg(nums), 2)).reduce((a, b) => a + b) / (nums.length - +sample);
 }
 
