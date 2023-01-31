@@ -17,4 +17,18 @@ describe("Basic usage", () => {
         expect(() => { const my_generator = new ExponentialGenerator({ rate: -2 }) }).toThrow(Error(ExponentialGeneratorErrors.INVALID_RATE));
         expect(() => { const my_generator = new ExponentialGenerator({ rate: 0 }) }).toThrow(Error(ExponentialGeneratorErrors.INVALID_RATE));
     });
+
+    it("Correctly logs values when shouldLogValues is true", () => {
+        const my_generator = new ExponentialGenerator({ rate: 5, shouldLogValues: true });
+
+        const generated_values = my_generator.generate(10);
+        expect(my_generator.log).toEqual(generated_values);
+    });
+
+    it("Correctly has log being null when shouldLogValues is false", () => {
+        const my_generator = new ExponentialGenerator({ rate: 5, shouldLogValues: false });
+
+        const generated_values = my_generator.generate(10);
+        expect(my_generator.log).toBe(null);
+    });
 });
