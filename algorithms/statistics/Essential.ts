@@ -18,7 +18,7 @@ const avg = (nums: number[]) => {
  * @returns The standard deviation.
  */
 const std = (nums: number[], sample: boolean=false) => {
-    if(!nums.length) return 0;
+    if(nums.length < 2) return 0;
     return Math.sqrt(vnc(nums, sample));
 }
 
@@ -32,7 +32,7 @@ const std = (nums: number[], sample: boolean=false) => {
  * @returns The variance.
  */
 const vnc = (nums: number[], sample: boolean=false) => {
-    if(!nums.length) return 0;
+    if(nums.length < 2) return 0;
     return nums.map(x => Math.pow(x - avg(nums), 2)).reduce((a, b) => a + b) / (nums.length - +sample);
 }
 
