@@ -21,6 +21,10 @@ export abstract class Generator {
      * Generates a single random sample. The implementation is distribution-specific. 
      */
     abstract generate_one(): number
+
+    get log() {
+        return this.#log;
+    };
  
     /**
      * Generates an arbitrary number of samples.
