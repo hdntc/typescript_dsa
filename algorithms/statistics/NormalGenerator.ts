@@ -1,4 +1,4 @@
-import { Generator } from "./Generator";
+import { Generator, GeneratorConfig } from "./Generator";
 
 export enum NormalGeneratorErrors {
     NONPOSITIVE_STD="You must supply a positive value for the standard deviation.",
@@ -16,7 +16,7 @@ export type NormalGeneratorConfig = {
     mean: number;
     methodID?: NormalGeneratorMethod;
     irwin_hall_samples?: number;
-};
+} & GeneratorConfig;
 
 /**
  * A class for generating samples from a normally distributed RV.
@@ -64,8 +64,8 @@ export class NormalGenerator extends Generator {
         return this.#std * Math.sqrt(3*n) * (2 * samples_sum / n - 1) + this.#mean;
     }
 
-    constructor({ std, mean, methodID, irwin_hall_samples }: NormalGeneratorConfig) {
-        super();
+    constructor({ std, mean, methodID, irwin_hall_samples, shouldLogValues }: NormalGeneratorConfig) {
+        super({ shouldLogValues });
         if(std < 0) throw Error(NormalGeneratorErrors.NONPOSITIVE_STD);
 
         if(typeof irwin_hall_samples !== "undefined") {

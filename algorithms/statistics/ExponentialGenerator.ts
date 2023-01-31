@@ -1,8 +1,8 @@
-import { Generator } from "./Generator";
+import { Generator, GeneratorConfig } from "./Generator";
 
 type ExponentialGeneratorConfig = {
     rate: number
-};
+} & GeneratorConfig;
 
 class ExponentialGenerator extends Generator {
     #rate: number;
@@ -11,8 +11,8 @@ class ExponentialGenerator extends Generator {
         return -Math.log(Math.random())/this.#rate;
     }
 
-    constructor({ rate }: ExponentialGeneratorConfig) {
-        super();
+    constructor({ rate, shouldLogValues }: ExponentialGeneratorConfig) {
+        super({ shouldLogValues });
         this.#rate = rate;
     }
 };
