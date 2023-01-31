@@ -1,4 +1,5 @@
 import { ExponentialGenerator, ExponentialGeneratorConfig, ExponentialGeneratorErrors } from "../algorithms/statistics/ExponentialGenerator";
+import { std, avg } from "../algorithms/statistics/Essential";
 
 describe("Basic usage", () => {
     it("Supports initialization (shouldLogValues false)", () => {
@@ -30,5 +31,21 @@ describe("Basic usage", () => {
 
         const generated_values = my_generator.generate(10);
         expect(my_generator.log).toBe(null);
+    });
+
+    it("Generates reasonable values", () => {
+        const my_generator = new ExponentialGenerator({ rate: 5, shouldLogValues: true });
+
+        const generated_values = my_generator.generate(10000);
+
+        // a and s should be around 1/rate = 0.2
+        const a: number = avg(generated_values);
+        const s: number = std(generated_values);
+        console.log(a,s);
+
+        expect(a).toBeGreaterThan(0.15);
+        expect(a).toBeLessThan(0.25);
+        expect(s).toBeGreaterThan(0.15);
+        expect(s).toBeLessThan(0.25);
     });
 });
