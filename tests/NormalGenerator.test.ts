@@ -1,12 +1,5 @@
 import { NormalGenerator, NormalGeneratorErrors, NormalGeneratorMethod } from "../algorithms/statistics/NormalGenerator";
-
-const avg = (nums: number[]) => {
-    return nums.reduce((acc, curr) => acc + curr) / nums.length;
-}
-
-const std = (nums: number[]) => {
-    return Math.sqrt(nums.map(x => Math.pow(x - avg(nums), 2)).reduce((a, b) => a + b) / nums.length);
-}
+import { std, avg } from "../algorithms/statistics/Essential";
 
 describe("basic usage", () => {
     it("generates values that are somewhat reasonable wrt config (box muller)", () => {
