@@ -1,10 +1,10 @@
 import { Generator, GeneratorConfig } from "./Generator";
 
-type ExponentialGeneratorConfig = {
+export type ExponentialGeneratorConfig = {
     rate: number
 } & GeneratorConfig;
 
-class ExponentialGenerator extends Generator {
+export class ExponentialGenerator extends Generator {
     #rate: number;
 
     generate_one() {
