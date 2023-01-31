@@ -1,5 +1,4 @@
 /**
- * Returns the average / mean of the input array.
  * @param nums The numbers to compute the average of.
  * @returns The average or mean.
  */
@@ -9,7 +8,6 @@ const avg = (nums: number[]) => {
 }
 
 /**
- * Returns the standard deviation of the input array.
  * @param nums The numbers to compute the standard deviation of.
  * @param sample Whether to regard `nums` as a sample or as a population. 
  * - If `true`, computes the sample std (commonly denoted as *s*). 
@@ -23,7 +21,6 @@ const std = (nums: number[], sample: boolean=false) => {
 }
 
 /**
- * Returns the variance of the input array.
  * @param nums The numbers to compute the variance of.
  * @param sample Whether to regard `nums` as a sample or as a population. 
  * - If `true`, computes the sample variance (commonly denoted as *s^2*). 
