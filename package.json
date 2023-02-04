@@ -9,6 +9,7 @@
     "ts-jest": "^29.0.3",
     "typedoc": "^0.23.24"
   },
+  "author": "harrydiv321",
   "dependencies": {
     "typescript": "^4.9.4"
   },
